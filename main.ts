@@ -1,112 +1,52 @@
-import { App, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { Plugin } from "obsidian";
+import { ExampleSettingsTab } from "./settings";
+import { ExampleView, VIEW_TYPE_EXAMPLE} from "./view"
 
-interface MyPluginSettings {
-	mySetting: string;
+interface ExamplePluginSettings {
+    dateFormat: string
 }
-
-const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
+const DEFAULT_SETTINGS: Partial<ExamplePluginSettings> = {
+    dateFormat: "YYYY-MM-DD"
 }
+export default class ExamplePlugin extends Plugin {
+    settings: ExamplePluginSettings;
+    view: ExampleView;
 
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
+    async onload() {
+        await this.loadSettings();
+        this.addSettingTab(new ExampleSettingsTab(this.app, this));
+        this.registerView(
+            VIEW_TYPE_EXAMPLE,
+            (leaf) => (this.view = new ExampleView(leaf))
+          );
+        this.addRibbonIcon("dice", "Activate view", () => {  //activate view
+            this.activateView();
+        });
+    }
+    async loadSettings() {
+        this.settings = Object.assign(DEFAULT_SETTINGS, await this.loadData())
+    }
+    async saveSettings() {
+        await this.saveData(this.settings);
+    }
+    async onunload() {
+        await this.view.onClose();
 
-	async onload() {
-		console.log('loading plugin');
-
-		await this.loadSettings();
-
-		this.addRibbonIcon('dice', 'Sample Plugin', () => {
-			new Notice('This is a notice!');
-		});
-
-		this.addStatusBarItem().setText('Status Bar Text');
-
-		this.addCommand({
-			id: 'open-sample-modal',
-			name: 'Open Sample Modal',
-			// callback: () => {
-			// 	console.log('Simple Callback');
-			// },
-			checkCallback: (checking: boolean) => {
-				let leaf = this.app.workspace.activeLeaf;
-				if (leaf) {
-					if (!checking) {
-						new SampleModal(this.app).open();
-					}
-					return true;
-				}
-				return false;
-			}
-		});
-
-		this.addSettingTab(new SampleSettingTab(this.app, this));
-
-		this.registerCodeMirror((cm: CodeMirror.Editor) => {
-			console.log('codemirror', cm);
-		});
-
-		this.registerDomEvent(document, 'click', (evt: MouseEvent) => {
-			console.log('click', evt);
-		});
-
-		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
-	}
-
-	onunload() {
-		console.log('unloading plugin');
-	}
-
-	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-	}
-
-	async saveSettings() {
-		await this.saveData(this.settings);
-	}
-}
-
-class SampleModal extends Modal {
-	constructor(app: App) {
-		super(app);
-	}
-
-	onOpen() {
-		let {contentEl} = this;
-		contentEl.setText('Woah!');
-	}
-
-	onClose() {
-		let {contentEl} = this;
-		contentEl.empty();
-	}
-}
-
-class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
-
-	constructor(app: App, plugin: MyPlugin) {
-		super(app, plugin);
-		this.plugin = plugin;
-	}
-
-	display(): void {
-		let {containerEl} = this;
-
-		containerEl.empty();
-
-		containerEl.createEl('h2', {text: 'Settings for my awesome plugin.'});
-
-		new Setting(containerEl)
-			.setName('Setting #1')
-			.setDesc('It\'s a secret')
-			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue('')
-				.onChange(async (value) => {
-					console.log('Secret: ' + value);
-					this.plugin.settings.mySetting = value;
-					await this.plugin.saveSettings();
-				}));
-	}
+        this.app.workspace
+            .getLeavesOfType(VIEW_TYPE_EXAMPLE)
+            .forEach((leaf) => leaf.detach());
+    }
+    async activateView() {
+        this.app.workspace.detachLeavesOfType(VIEW_TYPE_EXAMPLE);
+    
+        await this.app.workspace.getRightLeaf(false).setViewState({
+          type: VIEW_TYPE_EXAMPLE,
+          active: true,
+        });
+    
+        this.app.workspace.revealLeaf(
+          this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE)[0]
+        );
+      }
+    
 }
