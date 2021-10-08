@@ -1,8 +1,8 @@
 import * as React from "react";
 import { getTasks } from "./habiticaAPI"
 
-const username = "ebbdcbab-e0dc-404b-aa50-9824f0678adf"
-const credentials = "bed67d72-63cc-479c-88d3-8845569b04f8"
+const username = "<key>"
+const credentials = "<key>"
 
 class App extends React.Component<any,any> {
     constructor(props: any) {
