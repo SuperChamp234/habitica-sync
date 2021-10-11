@@ -9,9 +9,10 @@ export const VIEW_TYPE_EXAMPLE = "example-view"
 
 export class ExampleView extends ItemView {
     plugin: ExamplePlugin;
-    constructor(leaf: WorkspaceLeaf) {
+    constructor(leaf: WorkspaceLeaf, plugin: ExamplePlugin) {
         super(leaf)
-          console.log(this.plugin.settings)    }
+        this.plugin = plugin
+    }
 
     getViewType() {
         return VIEW_TYPE_EXAMPLE

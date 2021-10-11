@@ -20,7 +20,6 @@ class App extends React.Component<any,any> {
             .then(res => res.json())
             .then(
                 result => {
-                    console.log(result.data)
                     this.setState({
                         isLoaded: true,
                         tasks: result.data

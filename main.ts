@@ -21,7 +21,7 @@ export default class ExamplePlugin extends Plugin {
         this.addSettingTab(new ExampleSettingsTab(this.app, this));
         this.registerView(
             VIEW_TYPE_EXAMPLE,
-            (leaf) => (this.view = new ExampleView(leaf))
+            (leaf) => (this.view = new ExampleView(leaf, this))
           );
         this.addRibbonIcon("dice", "Activate view", () => {  //activate view
             this.activateView();
