@@ -1,12 +1,15 @@
 import * as React from "react";
 import { getTasks } from "./habiticaAPI"
+import TodoItem from "./TodoItem"
 
-const username = "<key>"
-const credentials = "<key>"
+let username = ""
+let credentials = ""
 
 class App extends React.Component<any,any> {
     constructor(props: any) {
         super(props)
+        username = this.props.username
+        credentials = this.props.apiToken
         this.state = {
             isLoaded: false,
             tasks: ""
@@ -17,7 +20,6 @@ class App extends React.Component<any,any> {
             .then(res => res.json())
             .then(
                 result => {
-                    console.log(result.data)
                     this.setState({
                         isLoaded: true,
                         tasks: result.data
@@ -40,7 +42,8 @@ class App extends React.Component<any,any> {
             return <div>Loading...</div>;
         } else {
             const listItems = tasks.map((tasks: any) =>
-                <li>{tasks.text}</li>
+                <TodoItem key={tasks.id} task={tasks}/>
+                
             );
             return (
                 <ul>{listItems}</ul>

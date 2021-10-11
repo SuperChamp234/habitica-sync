@@ -15,3 +15,10 @@ data.json
 
 #vscode
 .vscode
+
+#buildfiles
+settings.js
+view/App.js
+ReactView.js
+settings.js
+view.js

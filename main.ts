@@ -4,9 +4,13 @@ import { ExampleView, VIEW_TYPE_EXAMPLE} from "./view"
 
 interface ExamplePluginSettings {
     dateFormat: string
+    userID: string
+    apiToken: string
 }
 const DEFAULT_SETTINGS: Partial<ExamplePluginSettings> = {
-    dateFormat: "YYYY-MM-DD"
+    dateFormat: "YYYY-MM-DD",
+    userID: "",
+    apiToken: ""
 }
 export default class ExamplePlugin extends Plugin {
     settings: ExamplePluginSettings;
@@ -17,7 +21,7 @@ export default class ExamplePlugin extends Plugin {
         this.addSettingTab(new ExampleSettingsTab(this.app, this));
         this.registerView(
             VIEW_TYPE_EXAMPLE,
-            (leaf) => (this.view = new ExampleView(leaf))
+            (leaf) => (this.view = new ExampleView(leaf, this))
           );
         this.addRibbonIcon("dice", "Activate view", () => {  //activate view
             this.activateView();
