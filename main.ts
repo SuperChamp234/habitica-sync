@@ -4,9 +4,13 @@ import { ExampleView, VIEW_TYPE_EXAMPLE} from "./view"
 
 interface ExamplePluginSettings {
     dateFormat: string
+    userID: string
+    apiToken: string
 }
 const DEFAULT_SETTINGS: Partial<ExamplePluginSettings> = {
-    dateFormat: "YYYY-MM-DD"
+    dateFormat: "YYYY-MM-DD",
+    userID: "",
+    apiToken: ""
 }
 export default class ExamplePlugin extends Plugin {
     settings: ExamplePluginSettings;
