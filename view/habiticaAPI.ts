@@ -26,7 +26,6 @@ export async function getStats(username: string, credentials: string){
             "x-api-key": credentials,
         },
     })
-    console.log(response)
-    console.log("stats above")
+    console.log("stats") //can't print stats from here since the response is still an unresolved promise
     return (response)
 }
