@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getTasks } from "./habiticaAPI"
+import { getTasks, getStats } from "./habiticaAPI"
 import TodoItem from "./TodoItem"
 
 let username = ""
@@ -32,18 +32,37 @@ class App extends React.Component<any,any> {
                     })
                 }
             )
+        
+        getStats(username, credentials)
+        .then(res => res.json())
+        .then(
+            result => {
+                this.setState({
+                    isLoaded: true,
+                    stats: result.data
+                })
+            },
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                })
+            }
+        )
 
     }
     render(){
-        const { error, isLoaded, tasks } = this.state;
+        const { error, isLoaded, tasks, stats } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
             const listItems = tasks.map((tasks: any) =>
+            <div>
                 <TodoItem key={tasks.id} task={tasks}/>
-                
+                <p>{stats}</p>
+            </div>
             );
             return (
                 <ul>{listItems}</ul>

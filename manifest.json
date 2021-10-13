@@ -1,10 +1,10 @@
 {
-	"id": "test-plugin",
-	"name": "Test Plugin",
+	"id": "obsidian-habitica-integration",
+	"name": "AAA Obsidian Habitica Integration",
 	"version": "0.0.1",
 	"minAppVersion": "0.9.12",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Leoh",
+	"description": "This plugin helps integrate Habitica user tasks and stats into Obsidian",
+	"author": "Leoh and Ran",
 	"authorUrl": "",
 	"isDesktopOnly": false
 }
