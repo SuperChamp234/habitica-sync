@@ -3,6 +3,6 @@ import App from "./view/App";
 
 export default function ReactView(props: any){
   return(
-    <App username={props.userID} apiToken={props.tokenAPI}/>
+    <App username={props.userID} apiToken={props.tokenAPI} plugin={props.plugin}/>
   )
 }

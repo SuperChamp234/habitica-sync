@@ -24,7 +24,7 @@ export class ExampleView extends ItemView {
 
     async onOpen() {
         ReactDOM.render(
-            <ReactView userID = {this.plugin.settings.userID} tokenAPI = {this.plugin.settings.apiToken}/>,
+            <ReactView userID = {this.plugin.settings.userID} tokenAPI = {this.plugin.settings.apiToken} plugin={this.plugin}/>,
            this.containerEl.children[1]
         )
     }

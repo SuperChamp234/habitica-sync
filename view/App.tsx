@@ -26,6 +26,9 @@ class App extends React.Component<any,any> {
         }
         this.handleChange = this.handleChange.bind(this)
     }
+    sendNotice(message: string){
+        this.props.plugin.displayNotice(message)
+    }
     reloadData() {
         getStats(username, credentials)
             .then(res => res.json())
@@ -58,9 +61,18 @@ class App extends React.Component<any,any> {
                         .then(res => res.json())
                         .then(
                             result => {
-                                console.log("Checked!")
-                                console.log(result)
-                                this.reloadData()
+                                if(result.success) {
+                                    this.sendNotice("Checked!")
+                                    console.log(result)
+                                    this.reloadData()
+                                } else {
+                                    this.sendNotice("Resyncing, please try again")
+                                    this.reloadData()
+                                }
+                            },
+                            (error) => {
+                                this.sendNotice("API Error: Please Check crendentials and try again")
+                                console.log(error)
                             }
                         )
                 } else {
@@ -68,9 +80,18 @@ class App extends React.Component<any,any> {
                         .then(res => res.json())
                         .then(
                             result => {
-                                console.log("unchecked!")
-                                console.log(result)
-                                this.reloadData()
+                                if(result.success){
+                                    this.sendNotice("unchecked!")
+                                    console.log(result)
+                                    this.reloadData()
+                                } else {
+                                    this.sendNotice("Resyncing, please try again")
+                                    this.reloadData()
+                                }
+                            },
+                            (error) => {
+                                this.sendNotice("API Error: Please Check crendentials and try again")
+                                console.log(error)
                             }
                         )
                 }
