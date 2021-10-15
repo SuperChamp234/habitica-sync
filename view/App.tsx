@@ -100,10 +100,9 @@ class App extends React.Component<any,any> {
     }
 
     render(){
-        // if(this.state.error)
-        //     return(<div className="loading">Loading....</div>)
-        // else if(this.state.isLoaded)
-        if (!this.state.isLoaded)
+        if(this.state.error)
+            return(<div className="loading">Loading....</div>)
+        else if(!this.state.isLoaded)
             return <div className="loading">Loading....</div>
         else {
             return (<div>
