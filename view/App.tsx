@@ -81,7 +81,7 @@ class App extends React.Component<any,any> {
                         .then(
                             result => {
                                 if(result.success){
-                                    this.sendNotice("unchecked!")
+                                    this.sendNotice("Un-checked!")
                                     console.log(result)
                                     this.reloadData()
                                 } else {
