@@ -1,5 +1,6 @@
+import { Tasks } from "obsidian";
 import * as React from "react";
-import { getTasks, getStats } from "./habiticaAPI"
+import { getStats, scoreTask } from "./habiticaAPI"
 import TodoItem from "./TodoItem"
 
 let username = ""
@@ -21,32 +22,17 @@ class App extends React.Component<any,any> {
                     lvl: 0,
                 }
             },
-            tasks: []    //gave an error if the the tasks thing was string so better keep it an array for .map to work :)
+            tasks: []
         }
+        this.handleChange = this.handleChange.bind(this)
     }
-    componentDidMount() {
-        // getTasks(username, credentials)
-        //     .then(res => res.json())
-        //     .then(
-        //         result => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 tasks: result.data
-        //             })
-        //         },
-        //         (error) => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 error
-        //             })
-        //         }
-        //     )
-        
+    reloadData() {
         getStats(username, credentials)
             .then(res => res.json())
             .then(
                 result => {
-                    console.log(result) //yup this prints out correctly! since the promise is handled by .then
+                    console.log(result)
+                    console.log("data reloaded")
                     this.setState({
                         isLoaded: true,
                         user_data: result,
@@ -60,8 +46,38 @@ class App extends React.Component<any,any> {
                 })
             }
             )
-
     }
+    componentDidMount() {
+        this.reloadData()
+    }
+    handleChange(event: any){
+        this.state.tasks.forEach((element: any) => {
+            if(element.id == event.target.id){
+                if(!element.completed){
+                    scoreTask(username, credentials, event.target.id, "up")
+                        .then(res => res.json())
+                        .then(
+                            result => {
+                                console.log("Checked!")
+                                console.log(result)
+                                this.reloadData()
+                            }
+                        )
+                } else {
+                    scoreTask(username, credentials, event.target.id, "down")
+                        .then(res => res.json())
+                        .then(
+                            result => {
+                                console.log("unchecked!")
+                                console.log(result)
+                                this.reloadData()
+                            }
+                        )
+                }
+            }
+        })
+    }
+
     render(){
         const { error, isLoaded, tasks } = this.state;
         const user_data = this.state.user_data
@@ -71,9 +87,7 @@ class App extends React.Component<any,any> {
             return <div>Loading...</div>;
         } else {
             const listItems = tasks.map((tasks: any) =>
-            <div>
-                <TodoItem key={tasks.id} task={tasks}/>
-            </div>
+                <TodoItem  key={tasks.id} id={tasks.id} task={tasks} completed={tasks.completed} onChange={this.handleChange}/>
             );
             return (<div>
                 <h3>{user_data.profile.name}</h3>{"\n"}
