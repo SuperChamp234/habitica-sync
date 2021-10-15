@@ -1,7 +1,7 @@
-import { Tasks } from "obsidian";
 import * as React from "react";
 import { getStats, scoreTask } from "./habiticaAPI"
-import TodoItem from "./TodoItem"
+import Statsview from "./Components/Statsview"
+import Taskview from "./Components/Taskview"
 
 let username = ""
 let credentials = ""
@@ -22,7 +22,7 @@ class App extends React.Component<any,any> {
                     lvl: 0,
                 }
             },
-            tasks: []
+            todos: []
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -39,7 +39,7 @@ class App extends React.Component<any,any> {
                     this.setState({
                         isLoaded: true,
                         user_data: result,
-                        tasks: result.tasks.todos
+                        todos: result.tasks.todos
                 })
                 },
                 (error) => {
@@ -54,7 +54,7 @@ class App extends React.Component<any,any> {
         this.reloadData()
     }
     handleChange(event: any){
-        this.state.tasks.forEach((element: any) => {
+        this.state.todos.forEach((element: any) => {
             if(element.id == event.target.id){
                 if(!element.completed){
                     scoreTask(username, credentials, event.target.id, "up")
@@ -100,20 +100,15 @@ class App extends React.Component<any,any> {
     }
 
     render(){
-        const { error, isLoaded, tasks } = this.state;
-        const user_data = this.state.user_data
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else {
-            const listItems = tasks.map((tasks: any) =>
-                <TodoItem  key={tasks.id} id={tasks.id} task={tasks} completed={tasks.completed} onChange={this.handleChange}/>
-            );
+        // if(this.state.error)
+        //     return(<div className="loading">Loading....</div>)
+        // else if(this.state.isLoaded)
+        if (!this.state.isLoaded)
+            return <div className="loading">Loading....</div>
+        else {
             return (<div>
-                <h3>{user_data.profile.name}</h3>{"\n"}
-                <div>HP: {user_data.stats.hp}</div><div> XP: {user_data.stats.lvl}</div>{"\n"}
-                <ul>{listItems}</ul>
+                <Statsview user_data={this.state.user_data} />
+                <Taskview todos={this.state.todos} onChange={this.handleChange} />
                 </div>
             );
         }
