@@ -106,6 +106,7 @@ class App extends React.Component<any,any> {
             return <div className="loading">Loading....</div>
         else {
             return (<div className="plugin-root">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <Statsview user_data={this.state.user_data} />
                 <Taskview todos={this.state.todos} onChange={this.handleChange} />
                 </div>

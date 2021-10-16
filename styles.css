@@ -1,3 +1,11 @@
+#profile-name {
+  font-size: x-large;
+  font-weight: bold;
+  padding-bottom: 3%;
+}
+.stats {
+  padding-bottom: 6px;
+}
 .todo-item {
   display: flex;
   justify-content: flex-start;
@@ -18,11 +26,17 @@ input[type=checkbox]:focus {
   outline: 0;
 }
 .plugin-root {
-  min-width: 300px;
+  min-width: 260px;
 }
-
+.substats {
+  font-size: medium;
+}
 /* react-tabs internal file :wink: */
-
+.material-icons {
+  font-size: 13px !important;
+  padding-top: 1px;
+  padding-right: 2px;
+}
 .react-tabs {
   -webkit-tap-highlight-color: transparent;
 }
