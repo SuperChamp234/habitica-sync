@@ -105,7 +105,7 @@ class App extends React.Component<any,any> {
         else if(!this.state.isLoaded)
             return <div className="loading">Loading....</div>
         else {
-            return (<div>
+            return (<div className="plugin-root">
                 <Statsview user_data={this.state.user_data} />
                 <Taskview todos={this.state.todos} onChange={this.handleChange} />
                 </div>
