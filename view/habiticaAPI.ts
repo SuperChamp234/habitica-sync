@@ -1,8 +1,7 @@
 // import fetch from "node-fetch";
 
-
-export async function getTasks(username: string, credentials: string){
-    const url = "https://habitica.com/api/v3/tasks/user?type=todos"
+export async function getStats(username: string, credentials: string){
+    const url = "https://habitica.com/export/userdata.json"
     const response = fetch(url, {
         method: 'GET',
         headers: {
@@ -15,17 +14,16 @@ export async function getTasks(username: string, credentials: string){
     return (response)
 }
 
-export async function getStats(username: string, credentials: string){
-    const url = "https://habitica.com/export/userdata.json"
+export async function scoreTask(username: string, credentials: string, taskID: string, direction: string) {
+    const url = "https://habitica.com/api/v3/tasks/".concat(taskID).concat("/score/").concat(direction)
     const response = fetch(url, {
-        method: 'GET',
+        method: 'POST',
         headers: {
             "Content-Type": "application/json",
             "x-client": username.concat("-testAPI"),
             "x-api-user": username,
             "x-api-key": credentials,
-        },
+        }
     })
-    console.log("stats") //can't print stats from here since the response is still an unresolved promise
-    return (response)
+    return(response)
 }

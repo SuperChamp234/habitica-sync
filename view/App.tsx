@@ -1,6 +1,7 @@
 import * as React from "react";
-import { getTasks, getStats } from "./habiticaAPI"
-import TodoItem from "./TodoItem"
+import { getStats, scoreTask } from "./habiticaAPI"
+import Statsview from "./Components/Statsview"
+import Taskview from "./Components/Taskview"
 
 let username = ""
 let credentials = ""
@@ -21,36 +22,24 @@ class App extends React.Component<any,any> {
                     lvl: 0,
                 }
             },
-            tasks: []    //gave an error if the the tasks thing was string so better keep it an array for .map to work :)
+            todos: []
         }
+        this.handleChange = this.handleChange.bind(this)
     }
-    componentDidMount() {
-        // getTasks(username, credentials)
-        //     .then(res => res.json())
-        //     .then(
-        //         result => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 tasks: result.data
-        //             })
-        //         },
-        //         (error) => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 error
-        //             })
-        //         }
-        //     )
-        
+    sendNotice(message: string){
+        this.props.plugin.displayNotice(message)
+    }
+    reloadData() {
         getStats(username, credentials)
             .then(res => res.json())
             .then(
                 result => {
-                    console.log(result) //yup this prints out correctly! since the promise is handled by .then
+                    console.log(result)
+                    console.log("data reloaded")
                     this.setState({
                         isLoaded: true,
                         user_data: result,
-                        tasks: result.tasks.todos
+                        todos: result.tasks.todos
                 })
                 },
                 (error) => {
@@ -60,25 +49,65 @@ class App extends React.Component<any,any> {
                 })
             }
             )
-
     }
+    componentDidMount() {
+        this.reloadData()
+    }
+    handleChange(event: any){
+        this.state.todos.forEach((element: any) => {
+            if(element.id == event.target.id){
+                if(!element.completed){
+                    scoreTask(username, credentials, event.target.id, "up")
+                        .then(res => res.json())
+                        .then(
+                            result => {
+                                if(result.success) {
+                                    this.sendNotice("Checked!")
+                                    console.log(result)
+                                    this.reloadData()
+                                } else {
+                                    this.sendNotice("Resyncing, please try again")
+                                    this.reloadData()
+                                }
+                            },
+                            (error) => {
+                                this.sendNotice("API Error: Please Check crendentials and try again")
+                                console.log(error)
+                            }
+                        )
+                } else {
+                    scoreTask(username, credentials, event.target.id, "down")
+                        .then(res => res.json())
+                        .then(
+                            result => {
+                                if(result.success){
+                                    this.sendNotice("Un-checked!")
+                                    console.log(result)
+                                    this.reloadData()
+                                } else {
+                                    this.sendNotice("Resyncing, please try again")
+                                    this.reloadData()
+                                }
+                            },
+                            (error) => {
+                                this.sendNotice("API Error: Please Check crendentials and try again")
+                                console.log(error)
+                            }
+                        )
+                }
+            }
+        })
+    }
+
     render(){
-        const { error, isLoaded, tasks } = this.state;
-        const user_data = this.state.user_data
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else {
-            const listItems = tasks.map((tasks: any) =>
-            <div>
-                <TodoItem key={tasks.id} task={tasks}/>
-            </div>
-            );
+        if(this.state.error)
+            return(<div className="loading">Loading....</div>)
+        else if(!this.state.isLoaded)
+            return <div className="loading">Loading....</div>
+        else {
             return (<div>
-                <h3>{user_data.profile.name}</h3>{"\n"}
-                <div>HP: {user_data.stats.hp}</div><div> XP: {user_data.stats.lvl}</div>{"\n"}
-                <ul>{listItems}</ul>
+                <Statsview user_data={this.state.user_data} />
+                <Taskview todos={this.state.todos} onChange={this.handleChange} />
                 </div>
             );
         }

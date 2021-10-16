@@ -1,4 +1,4 @@
-import { Plugin } from "obsidian";
+import { Notice, Plugin } from "obsidian";
 import { ExampleSettingsTab } from "./settings";
 import { ExampleView, VIEW_TYPE_EXAMPLE} from "./view"
 
@@ -14,6 +14,9 @@ export default class ExamplePlugin extends Plugin {
     settings: ExamplePluginSettings;
     view: ExampleView;
 
+    displayNotice(message: string){
+        new Notice(message)
+    }
     async onload() {
         await this.loadSettings();
         this.addSettingTab(new ExampleSettingsTab(this.app, this));
