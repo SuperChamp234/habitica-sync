@@ -6,5 +6,6 @@
 	"description": "This plugin helps integrate Habitica user tasks and stats into Obsidian",
 	"author": "Leoh and Ran",
 	"authorUrl": "",
-	"isDesktopOnly": false
+	"isDesktopOnly": false,
+	"js": "main.js"
 }
