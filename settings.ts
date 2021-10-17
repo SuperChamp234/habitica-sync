@@ -1,10 +1,10 @@
-import ExamplePlugin from "main";
+import HabiticaSync from "main";
 import { App, PluginSettingTab, Setting } from "obsidian";
 
-export class ExampleSettingsTab extends PluginSettingTab {
-    plugin: ExamplePlugin;
+export class HabiticaSyncSettingsTab extends PluginSettingTab {
+    plugin: HabiticaSync;
 
-    constructor(app: App, plugin: ExamplePlugin) {
+    constructor(app: App, plugin: HabiticaSync) {
         super(app, plugin)
         this.plugin = plugin
     }

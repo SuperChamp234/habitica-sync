@@ -34,13 +34,18 @@ class App extends React.Component<any,any> {
             .then(res => res.json())
             .then(
                 result => {
-                    console.log(result)
-                    console.log("data reloaded")
-                    this.setState({
-                        isLoaded: true,
-                        user_data: result,
-                        todos: result.tasks.todos
-                })
+                    if(result.success === false){
+                        this.sendNotice("Login Failed, Please check credentials and try again!")
+                        console.log(result)
+                    } else {
+                        console.log(result)
+                        console.log("data reloaded")
+                        this.setState({
+                            isLoaded: true,
+                            user_data: result,
+                            todos: result.tasks.todos
+                        })
+                    }
                 },
                 (error) => {
                     this.setState({

@@ -1,31 +1,39 @@
 import { Notice, Plugin } from "obsidian";
-import { ExampleSettingsTab } from "./settings";
-import { ExampleView, VIEW_TYPE_EXAMPLE} from "./view"
+import { HabiticaSyncSettingsTab } from "./settings";
+import { HabiticaSyncView, VIEW_TYPE} from "./view"
 
-interface ExamplePluginSettings {
+interface HabiticaSyncSettings {
     userID: string
     apiToken: string
 }
-const DEFAULT_SETTINGS: Partial<ExamplePluginSettings> = {
+const DEFAULT_SETTINGS: Partial<HabiticaSyncSettings> = {
     userID: "",
     apiToken: ""
 }
-export default class ExamplePlugin extends Plugin {
-    settings: ExamplePluginSettings;
-    view: ExampleView;
+export default class HabiticaSync extends Plugin {
+    settings: HabiticaSyncSettings;
+    view: HabiticaSyncView;
 
     displayNotice(message: string){
         new Notice(message)
     }
     async onload() {
         await this.loadSettings();
-        this.addSettingTab(new ExampleSettingsTab(this.app, this));
+        this.addSettingTab(new HabiticaSyncSettingsTab(this.app, this));
         this.registerView(
-            VIEW_TYPE_EXAMPLE,
-            (leaf) => (this.view = new ExampleView(leaf, this))
+            VIEW_TYPE,
+            (leaf) => (this.view = new HabiticaSyncView(leaf, this))
           );
         this.addRibbonIcon("popup-open", "Open Habitica Pane", () => {  //activate view
             this.activateView();
+        });
+        this.addCommand({
+            id: "habitica-view-open",
+            name: "Habitica: Open Pane",
+            hotkeys: [{ modifiers: ["Mod", "Shift"], key: "h"}],
+            callback: () => {
+                this.activateView();
+            }
         });
     }
     async loadSettings() {
@@ -38,19 +46,19 @@ export default class ExamplePlugin extends Plugin {
         await this.view.onClose();
 
         this.app.workspace
-            .getLeavesOfType(VIEW_TYPE_EXAMPLE)
+            .getLeavesOfType(VIEW_TYPE)
             .forEach((leaf) => leaf.detach());
     }
     async activateView() {
-        this.app.workspace.detachLeavesOfType(VIEW_TYPE_EXAMPLE);
+        this.app.workspace.detachLeavesOfType(VIEW_TYPE);
     
         await this.app.workspace.getRightLeaf(false).setViewState({
-          type: VIEW_TYPE_EXAMPLE,
+          type: VIEW_TYPE,
           active: true,
         });
     
         this.app.workspace.revealLeaf(
-          this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE)[0]
+          this.app.workspace.getLeavesOfType(VIEW_TYPE)[0]
         );
       }
     

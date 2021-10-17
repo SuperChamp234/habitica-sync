@@ -2,24 +2,24 @@ import { ItemView,WorkspaceLeaf } from "obsidian";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import ReactView from "./ReactView";
-import ExamplePlugin from "main";
+import HabiticaSync from "main";
 
 
-export const VIEW_TYPE_EXAMPLE = "example-view"
+export const VIEW_TYPE = "example-view"
 
-export class ExampleView extends ItemView {
-    plugin: ExamplePlugin;
-    constructor(leaf: WorkspaceLeaf, plugin: ExamplePlugin) {
+export class HabiticaSyncView extends ItemView {
+    plugin: HabiticaSync;
+    constructor(leaf: WorkspaceLeaf, plugin: HabiticaSync) {
         super(leaf)
         this.plugin = plugin
     }
 
     getViewType() {
-        return VIEW_TYPE_EXAMPLE
+        return VIEW_TYPE
     }
 
     getDisplayText() {
-        return "Example View"
+        return "Habitica Pane"
     }
 
     async onOpen() {
