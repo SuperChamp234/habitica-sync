@@ -24,7 +24,7 @@ export default class ExamplePlugin extends Plugin {
             VIEW_TYPE_EXAMPLE,
             (leaf) => (this.view = new ExampleView(leaf, this))
           );
-        this.addRibbonIcon("dice", "Open Habitica Pane", () => {  //activate view
+        this.addRibbonIcon("popup-open", "Open Habitica Pane", () => {  //activate view
             this.activateView();
         });
     }
