@@ -1,4 +1,4 @@
-# Obsidian x Habitica Integration
+# Habitica Sync in Obsidian
 This plugin for Obsidian incorporates a view to display and interact with the task management app Habitica.
 
 ## Usage
@@ -13,10 +13,8 @@ The plugin's view is enabled by clicking on the "Open Habitica Pane" option in t
 The following two inputs help fetch your user data to be displayed in the Obsidian view.
 
 ## Roadmap
+We will be implementing additional features including:
 
-We will be implementing this stuff in coming time
-
-- Dailies and Habits view
-- Adding new tasks/habits
-- Delete Tasks/Habits
-- View Rewards.
+- Panes to view active/completed dailies and habits
+- Add/delete/customize tasks and habits
+- View/claim rewards 
