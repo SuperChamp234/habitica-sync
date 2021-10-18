@@ -29,7 +29,7 @@ export default class HabiticaSync extends Plugin {
         });
         this.addCommand({
             id: "habitica-view-open",
-            name: "Habitica: Open Pane",
+            name: "Open Pane",
             hotkeys: [{ modifiers: ["Mod", "Shift"], key: "h"}],
             callback: () => {
                 this.activateView();
