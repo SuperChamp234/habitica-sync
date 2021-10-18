@@ -37,6 +37,8 @@
   outline: none;
 }
 
+.re
+
 .react-tabs__tab:focus:after {
   content: "";
   position: absolute;
