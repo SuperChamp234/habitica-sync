@@ -1,9 +1,7 @@
 import * as React from "react";
-import TodoItem from "./TodoItem"
-import Taskview from "../Taskview"
-import Dailiesview from "../Dailiesview"
-import Habitsview from "../Habitsview"
-import Todoview from "../Todoview"
+import Dailiesview from "./Dailiesview"
+import Habitsview from "./Habitsview"
+import Todoview from "./Todoview"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 export default function Index(props: any){
@@ -21,16 +19,16 @@ export default function Index(props: any){
                         </Tab>
                     </TabList>
                     <TabPanel>
-                        <Habitsview habits={props.state.habits} onChange={props.handleChange} />
+                        <Habitsview habits={props.data.habits} onChange={props.handleChangeHabits}/>
                     </TabPanel>
                     <TabPanel>
-                        <Dailiesview dailys={props.state.dailys} onChange={props.handleChange} />
+                        <Dailiesview dailys={props.data.dailys} onChange={props.handleChangeDailys} />
                     </TabPanel>
                     <TabPanel>
-                    <Todoview todos={props.state.todos} onChange={props.handleChange} />
+                    <Todoview todos={props.data.todos} onChange={props.handleChangeTodos} />
                     </TabPanel>
                     </Tabs>
                 </div>
     return(display);
-}                
+}                 
 
