@@ -3,8 +3,6 @@ import { getStats, scoreTask } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
 
-import { domainToASCII } from "url";
-
 let username = ""
 let credentials = ""
 
@@ -44,10 +42,7 @@ class App extends React.Component<any,any> {
                 result => {
                     if(result.success === false){
                         this.sendNotice("Login Failed, Please check credentials and try again!")
-                        console.log(result)
                     } else {
-                        console.log(result)
-                        console.log("data reloaded")
                         this.setState({
                             isLoaded: true,
                             user_data: result,
