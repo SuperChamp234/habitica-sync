@@ -1,3 +1,4 @@
+
 #profile-name {
   font-size: x-large;
   font-weight: bold;
@@ -6,9 +7,49 @@
 .stats {
   padding-bottom: 6px;
 }
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
 .todo-item {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  padding: 0px 0px 0;
+  width: 80%;
+  border-bottom: 1px solid #cecece;
+  font-family: Roboto, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.habit-plus {
+  /* background-color: #fff; */
+  border-radius: 50%;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.habit-minus {
+  /* background-color: #fff; */
+  border-radius: 50%;
+  border: none;
+  color: white;
+  padding: 7px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.habit-item {
+  display: flex;
+  justify-content: center;
   align-items: center;
   padding: 0px 0px 0;
   width: 80%;

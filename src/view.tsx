@@ -1,7 +1,7 @@
 import { ItemView,WorkspaceLeaf } from "obsidian";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import ReactView from "./ReactView";
+import App from "./view/App"
 import HabiticaSync from "./main";
 
 
@@ -27,7 +27,7 @@ export class HabiticaSyncView extends ItemView {
 
     async onOpen() {
         ReactDOM.render(
-            <ReactView userID = {this.plugin.settings.userID} tokenAPI = {this.plugin.settings.apiToken} plugin={this.plugin}/>,
+            <App plugin={this.plugin}/>,
            this.containerEl.children[1]
         )
     }
