@@ -11,8 +11,8 @@ let credentials = ""
 class App extends React.Component<any,any> {
     constructor(props: any) {
         super(props)
-        username = this.props.username
-        credentials = this.props.apiToken
+        username = this.props.plugin.settings.userID
+        credentials = this.props.plugin.settings.apiToken
         this.state = {
             isLoaded: false,
             user_data: {
