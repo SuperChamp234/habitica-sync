@@ -71,7 +71,6 @@ class App extends React.Component<any,any> {
                             result => {
                                 if(result.success) {
                                     this.sendNotice("Checked!")
-                                    console.log(result)
                                     this.reloadData()
                                 } else {
                                     this.sendNotice("Resyncing, please try again")
@@ -90,7 +89,6 @@ class App extends React.Component<any,any> {
                             result => {
                                 if(result.success){
                                     this.sendNotice("Un-checked!")
-                                    console.log(result)
                                     this.reloadData()
                                 } else {
                                     this.sendNotice("Resyncing, please try again")
@@ -116,7 +114,6 @@ class App extends React.Component<any,any> {
                             result => {
                                 if(result.success) {
                                     this.sendNotice("Checked!")
-                                    console.log(result)
                                     this.reloadData()
                                 } else {
                                     this.sendNotice("Resyncing, please try again")
@@ -135,7 +132,6 @@ class App extends React.Component<any,any> {
                             result => {
                                 if(result.success){
                                     this.sendNotice("Un-checked!")
-                                    console.log(result)
                                     this.reloadData()
                                 } else {
                                     this.sendNotice("Resyncing, please try again")
@@ -153,7 +149,6 @@ class App extends React.Component<any,any> {
     }
     handleChangeHabits(event: any){
         const target_id = event.target.id.slice(4)
-        console.log(target_id)
         if(event.target.id.slice(0,4) == "plus"){
             this.state.tasks.habits.forEach((element: any) => {
                 if(element.id == target_id){
@@ -163,7 +158,6 @@ class App extends React.Component<any,any> {
                             result => {
                                 if(result.success) {
                                     this.sendNotice("Plus!")
-                                    console.log(result)
                                     this.reloadData()
                                 } else {
                                     this.sendNotice("Resyncing, please try again")
@@ -187,7 +181,6 @@ class App extends React.Component<any,any> {
                             result => {
                                 if(result.success) {
                                     this.sendNotice("Minus :(")
-                                    console.log(result)
                                     this.reloadData()
                                 } else {
                                     this.sendNotice("Resyncing, please try again")
