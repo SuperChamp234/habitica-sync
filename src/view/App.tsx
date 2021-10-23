@@ -36,11 +36,10 @@ class App extends React.Component<any,any> {
     sendNotice(message: string){
         new Notice(message)
     }
-    reloadData() {
-        getStats(username, credentials)
-            .then(res => res.json())
-            .then(
-                result => {
+    async reloadData() {
+        const result = (await getStats(username, credentials)).json()
+        result.then(
+            result => {
                     if(result.success === false){
                         this.sendNotice("Login Failed, Please check credentials and try again!")
                     } else {
@@ -57,50 +56,38 @@ class App extends React.Component<any,any> {
                         error
                 })
             }
-            )
+        )
     }
     componentDidMount() {
         this.reloadData()
     }
+    
+    async sendScore(id:string , score: string, message: string){
+        const result = (await scoreTask(username, credentials, id, score)).json()
+        result.then(
+            result => {
+                if(result.success) {
+                    this.sendNotice(message)
+                    this.reloadData()
+                } else {
+                    this.sendNotice("Resyncing, please try again")
+                    this.reloadData()
+                }
+            },
+            (error) => {
+                this.sendNotice("API Error: Please Check crendentials and try again")
+                console.log(error)
+            }
+        )
+    }
+
     handleChangeTodos(event: any){
         this.state.tasks.todos.forEach((element: any) => {
             if(element.id == event.target.id){
                 if(!element.completed){
-                    scoreTask(username, credentials, event.target.id, "up")
-                        .then(res => res.json())
-                        .then(
-                            result => {
-                                if(result.success) {
-                                    this.sendNotice("Checked!")
-                                    this.reloadData()
-                                } else {
-                                    this.sendNotice("Resyncing, please try again")
-                                    this.reloadData()
-                                }
-                            },
-                            (error) => {
-                                this.sendNotice("API Error: Please Check crendentials and try again")
-                                console.log(error)
-                            }
-                        )
+                    this.sendScore(event.target.id,"up", "Checked!")
                 } else {
-                    scoreTask(username, credentials, event.target.id, "down")
-                        .then(res => res.json())
-                        .then(
-                            result => {
-                                if(result.success){
-                                    this.sendNotice("Un-checked!")
-                                    this.reloadData()
-                                } else {
-                                    this.sendNotice("Resyncing, please try again")
-                                    this.reloadData()
-                                }
-                            },
-                            (error) => {
-                                this.sendNotice("API Error: Please Check crendentials and try again")
-                                console.log(error)
-                            }
-                        )
+                    this.sendScore(event.target.id,"down", "Un-Checked!")
                 }
             }
         })
@@ -108,42 +95,12 @@ class App extends React.Component<any,any> {
     handleChangeDailys(event: any){
         this.state.tasks.dailys.forEach((element: any) => {
             if(element.id == event.target.id){
-                if(!element.completed){
-                    scoreTask(username, credentials, event.target.id, "up")
-                        .then(res => res.json())
-                        .then(
-                            result => {
-                                if(result.success) {
-                                    this.sendNotice("Checked!")
-                                    this.reloadData()
-                                } else {
-                                    this.sendNotice("Resyncing, please try again")
-                                    this.reloadData()
-                                }
-                            },
-                            (error) => {
-                                this.sendNotice("API Error: Please Check crendentials and try again")
-                                console.log(error)
-                            }
-                        )
-                } else {
-                    scoreTask(username, credentials, event.target.id, "down")
-                        .then(res => res.json())
-                        .then(
-                            result => {
-                                if(result.success){
-                                    this.sendNotice("Un-checked!")
-                                    this.reloadData()
-                                } else {
-                                    this.sendNotice("Resyncing, please try again")
-                                    this.reloadData()
-                                }
-                            },
-                            (error) => {
-                                this.sendNotice("API Error: Please Check crendentials and try again")
-                                console.log(error)
-                            }
-                        )
+                if(element.id == event.target.id){
+                    if(!element.completed){
+                        this.sendScore(event.target.id,"up", "Checked!")
+                    } else {
+                        this.sendScore(event.target.id,"down", "Un-Checked!")
+                    }
                 }
             }
         })
@@ -153,46 +110,14 @@ class App extends React.Component<any,any> {
         if(event.target.id.slice(0,4) == "plus"){
             this.state.tasks.habits.forEach((element: any) => {
                 if(element.id == target_id){
-                    scoreTask(username, credentials, target_id, "up")
-                        .then(res => res.json())
-                        .then(
-                            result => {
-                                if(result.success) {
-                                    this.sendNotice("Plus!")
-                                    this.reloadData()
-                                } else {
-                                    this.sendNotice("Resyncing, please try again")
-                                    this.reloadData()
-                                }
-                            },
-                            (error) => {
-                                this.sendNotice("API Error: Please Check crendentials and try again")
-                                console.log(error)
-                            }
-                        )
+                    this.sendScore(target_id,"up", "Plus!")
                 }
             })
         }
         else {
             this.state.tasks.habits.forEach((element: any) => {
                 if(element.id == target_id){
-                    scoreTask(username, credentials, target_id, "down")
-                        .then(res => res.json())
-                        .then(
-                            result => {
-                                if(result.success) {
-                                    this.sendNotice("Minus :(")
-                                    this.reloadData()
-                                } else {
-                                    this.sendNotice("Resyncing, please try again")
-                                    this.reloadData()
-                                }
-                            },
-                            (error) => {
-                                this.sendNotice("API Error: Please Check crendentials and try again")
-                                console.log(error)
-                            }
-                        )
+                    this.sendScore(target_id,"down", "Minus :(")
                 }
             })
         }

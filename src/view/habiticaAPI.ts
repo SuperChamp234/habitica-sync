@@ -2,7 +2,7 @@
 
 export async function getStats(username: string, credentials: string){
     const url = "https://habitica.com/export/userdata.json"
-    const response = fetch(url, {
+    const response = await fetch(url, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -11,7 +11,7 @@ export async function getStats(username: string, credentials: string){
             "x-api-key": credentials,
         },
     })
-    return (response)
+    return (await response)
 }
 
 export async function scoreTask(username: string, credentials: string, taskID: string, direction: string) {
