@@ -5,17 +5,17 @@ import Todoview from "./Todoview"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 export default function Index(props: any){
-    const display = <div className="taskView">
+    const display = <div className="task-view">
                     <Tabs>
                         <TabList>
-                            <Tab>
+                            <Tab >
                                 <span className="material-icons md-24">task_alt</span>
                             </Tab>
                             <Tab>
-                                <span className="material-icons">today</span>
+                                <span className="material-icons md-24">today</span>
                             </Tab>
                             <Tab>
-                                <span className="material-icons">add_circle_outline</span>
+                                <span className="material-icons md-24">add_circle_outline</span>
                             </Tab>
                         </TabList>
                         <TabPanel>
@@ -30,5 +30,5 @@ export default function Index(props: any){
                     </Tabs>
                 </div>
     return(display);
-}                 
+}                 //yes
 
