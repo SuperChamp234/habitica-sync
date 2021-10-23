@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Notice } from "obsidian";
 import { getStats, scoreTask } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
@@ -31,9 +32,9 @@ class App extends React.Component<any,any> {
         this.handleChangeHabits = this.handleChangeHabits.bind(this)
 
 
-    }
+    } 
     sendNotice(message: string){
-        this.props.plugin.displayNotice(message)
+        new Notice(message)
     }
     reloadData() {
         getStats(username, credentials)
