@@ -1,4 +1,4 @@
-import { Notice, Plugin } from "obsidian";
+import { Plugin } from "obsidian";
 import { HabiticaSyncSettingsTab } from "./settings";
 import { HabiticaSyncView, VIEW_TYPE} from "./view"
 
@@ -14,15 +14,12 @@ export default class HabiticaSync extends Plugin {
     settings: HabiticaSyncSettings;
     view: HabiticaSyncView;
 
-    displayNotice(message: string){
-        new Notice(message)
-    }
     async onload() {
         await this.loadSettings();
         this.addSettingTab(new HabiticaSyncSettingsTab(this.app, this));
         this.registerView(
             VIEW_TYPE,
-            (leaf) => (this.view = new HabiticaSyncView(leaf, this))
+            (leaf) => (new HabiticaSyncView(leaf, this))
           );
         this.addRibbonIcon("popup-open", "Open Habitica Pane", () => {  //activate view
             this.activateView();

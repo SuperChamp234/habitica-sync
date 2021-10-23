@@ -12,5 +12,8 @@ package-lock.json
 # obsidian
 data.json
 
+#build_files
+main.js
+
 #vscode
 .vscode
