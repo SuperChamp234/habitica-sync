@@ -149,13 +149,3 @@ input[type=checkbox]:focus {
 .react-tabs__tab-panel--selected {
   display: block;
 }
-ul li:not(.task-list-item)::before {
-  content: "•";
-  color: transparent;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-  padding: 0;
-  font-weight: bold;
-  text-shadow: 0 0 0.5em transparent;
-}
