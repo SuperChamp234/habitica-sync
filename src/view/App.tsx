@@ -4,14 +4,15 @@ import { getStats, scoreTask } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
 
-let username = ""
-let credentials = ""
+
 
 class App extends React.Component<any,any> {
+    username = ""
+    credentials = ""
     constructor(props: any) {
         super(props)
-        username = this.props.plugin.settings.userID
-        credentials = this.props.plugin.settings.apiToken
+        this.username = this.props.plugin.settings.userID
+        this.credentials = this.props.plugin.settings.apiToken
         this.state = {
             isLoaded: false,
             user_data: {
@@ -37,11 +38,11 @@ class App extends React.Component<any,any> {
         new Notice(message)
     }
     async reloadData() {
-        const result = (await getStats(username, credentials)).json()
+        const result = (await getStats(this.username, this.credentials)).json()
         result.then(
             result => {
                     if(result.success === false){
-                        this.sendNotice("Login Failed, Please check credentials and try again!")
+                        this.sendNotice("Login Failed, Please check this.credentials and try again!")
                     } else {
                         this.setState({
                             isLoaded: true,
@@ -63,7 +64,7 @@ class App extends React.Component<any,any> {
     }
     
     async sendScore(id:string , score: string, message: string){
-        const result = (await scoreTask(username, credentials, id, score)).json()
+        const result = (await scoreTask(this.username, this.credentials, id, score)).json()
         result.then(
             result => {
                 if(result.success) {
