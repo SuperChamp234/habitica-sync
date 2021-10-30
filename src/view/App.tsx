@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Notice } from "obsidian";
-import { getStats, scoreTask } from "./habiticaAPI"
+import { getStats, scoreTask, makeCronReq } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
 
@@ -12,6 +12,7 @@ class App extends React.Component<any,any> {
         this.username = this.props.plugin.settings.userID
         this.credentials = this.props.plugin.settings.apiToken
         this.state = {
+            needCron: false,
             isLoaded: false,
             user_data: {
                 profile: {
@@ -20,7 +21,8 @@ class App extends React.Component<any,any> {
                 stats: {
                     hp: 0,
                     lvl: 0,
-                }
+                },
+                lastCron: "",
             },
             todos: [],
             dailys: [],
@@ -32,6 +34,31 @@ class App extends React.Component<any,any> {
 
 
     }
+    CheckCron(props: any) {
+        let cronDate = new Date(props.lastCron).getTime();
+        let now = new Date().getTime();
+        if (now > cronDate + 86400000) {
+            return(
+                <div className="cron">
+                    <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards. </div>
+                    <button onClick={() => {this.runCron()}}>Continue</button>
+                </div>
+            );
+        }
+        else {
+            console.log("Cron is up to date");
+            return null
+        };
+    }
+    runCron() {
+        makeCronReq(this.username, this.credentials)
+        .then(res => {
+            this.setState({
+                needCron: false
+            })
+        });
+        this.reloadData();
+    }    
     async reloadData() {
         try {
 			let response = await getStats(this.username, this.credentials);
@@ -40,6 +67,7 @@ class App extends React.Component<any,any> {
 				new Notice('Login Failed, Please check credentials and try again!');
 			}
 			else {
+                console.log(result);
 				this.setState({
 					isLoaded: true,
 					user_data: result,
@@ -124,6 +152,7 @@ class App extends React.Component<any,any> {
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <Statsview user_data={this.state.user_data} />
                 <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits}/>
+                <this.CheckCron lastCron={this.state.user_data.lastCron}/>
                 </div>
             );
         }
