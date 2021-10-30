@@ -4,14 +4,13 @@ import { getStats, scoreTask } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
 
-let username = ""
-let credentials = ""
-
 class App extends React.Component<any,any> {
+    username = ""
+    credentials = ""
     constructor(props: any) {
         super(props)
-        username = this.props.plugin.settings.userID
-        credentials = this.props.plugin.settings.apiToken
+        this.username = this.props.plugin.settings.userID
+        this.credentials = this.props.plugin.settings.apiToken
         this.state = {
             isLoaded: false,
             user_data: {
@@ -32,53 +31,45 @@ class App extends React.Component<any,any> {
         this.handleChangeHabits = this.handleChangeHabits.bind(this)
 
 
-    } 
-    sendNotice(message: string){
-        new Notice(message)
     }
     async reloadData() {
-        const result = (await getStats(username, credentials)).json()
-        result.then(
-            result => {
-                    if(result.success === false){
-                        this.sendNotice("Login Failed, Please check credentials and try again!")
-                    } else {
-                        this.setState({
-                            isLoaded: true,
-                            user_data: result,
-                            tasks: result.tasks,
-                        })
-                    }
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                })
-            }
-        )
+        try {
+			let response = await getStats(this.username, this.credentials);
+			let result = await response.json();
+			if (result.success === false) {
+				new Notice('Login Failed, Please check credentials and try again!');
+			}
+			else {
+				this.setState({
+					isLoaded: true,
+					user_data: result,
+					tasks: result.tasks,
+				});
+			}
+		} catch (e) {
+            console.log(e);
+            new Notice("API Error: Please check credentials")
+		}
     }
     componentDidMount() {
         this.reloadData()
     }
     
     async sendScore(id:string , score: string, message: string){
-        const result = (await scoreTask(username, credentials, id, score)).json()
-        result.then(
-            result => {
-                if(result.success) {
-                    this.sendNotice(message)
-                    this.reloadData()
-                } else {
-                    this.sendNotice("Resyncing, please try again")
-                    this.reloadData()
-                }
-            },
-            (error) => {
-                this.sendNotice("API Error: Please Check crendentials and try again")
-                console.log(error)
+        try {
+			let response = await scoreTask(this.username, this.credentials, id, score);
+			let result = await response.json();
+			if(result.success === true){
+                new Notice(message);
+                this.reloadData();
+            } else {
+                new Notice("Resyncing, please try again");
+                this.reloadData();
             }
-        )
+		} catch (e) {
+            console.log(e);
+            new Notice("API Error: Please check credentials")
+		}
     }
 
     handleChangeTodos(event: any){
