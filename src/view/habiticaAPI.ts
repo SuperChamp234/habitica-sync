@@ -6,7 +6,7 @@ export async function getStats(username: string, credentials: string){
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
-            "x-client": username.concat("-testAPI"),
+            "x-client": "278e719e-5f9c-43b1-9dba-8b73343dc062-HabiticaSync",
             "x-api-user": username,
             "x-api-key": credentials,
         },
@@ -20,7 +20,20 @@ export async function scoreTask(username: string, credentials: string, taskID: s
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            "x-client": username.concat("-testAPI"),
+            "x-client": "278e719e-5f9c-43b1-9dba-8b73343dc062-HabiticaSync",
+            "x-api-user": username,
+            "x-api-key": credentials,
+        }
+    })
+    return(response)
+}
+export async function makeCronReq(username: string, credentials: string, taskID: string){
+    const url = "https://habitica.com/api/v3/cron";
+    const response = fetch(url, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "x-client": "278e719e-5f9c-43b1-9dba-8b73343dc062-HabiticaSync",
             "x-api-user": username,
             "x-api-key": credentials,
         }
