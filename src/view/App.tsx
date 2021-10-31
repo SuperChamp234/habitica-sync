@@ -41,7 +41,7 @@ class App extends React.Component<any,any> {
             return(
                 <div className="cron">
                     <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards. </div>
-                    <button onClick={() => {this.runCron}}>Continue</button>
+                    <button onClick={this.runCron}>Continue</button>
                 </div>
             );
         }
@@ -55,7 +55,7 @@ class App extends React.Component<any,any> {
         makeCronReq(this.username, this.credentials)
         .then(res => {
             this.setState({
-                needCron: false
+                needCron: false,
             })
         });
         this.reloadData();
