@@ -28,20 +28,20 @@ class App extends React.Component<any,any> {
             dailys: [],
             habits: [],
         }
-        this.handleChangeTodos = this.handleChangeTodos.bind(this)
-        this.handleChangeDailys = this.handleChangeDailys.bind(this)
-        this.handleChangeHabits = this.handleChangeHabits.bind(this)
-
+        this.handleChangeTodos = this.handleChangeTodos.bind(this);
+        this.handleChangeDailys = this.handleChangeDailys.bind(this);
+        this.handleChangeHabits = this.handleChangeHabits.bind(this);
+        this.runCron = this.runCron.bind(this);
 
     }
-    CheckCron(props: any) {
-        let cronDate = new Date(props.lastCron).getTime();
-        let now = new Date().getTime();
-        if (now > cronDate + 86400000) {
+    CheckCron(lastCron: string) {
+        let cronDate = new Date(lastCron).getDate();
+        let now = new Date().getDate();
+        if (cronDate < now) {
             return(
                 <div className="cron">
                     <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards. </div>
-                    <button onClick={() => {this.runCron()}}>Continue</button>
+                    <button onClick={() => {this.runCron}}>Continue</button>
                 </div>
             );
         }
@@ -51,6 +51,7 @@ class App extends React.Component<any,any> {
         };
     }
     runCron() {
+        console.log("running cron");
         makeCronReq(this.username, this.credentials)
         .then(res => {
             this.setState({
@@ -143,6 +144,7 @@ class App extends React.Component<any,any> {
     }
 
     render(){
+        let content = this.CheckCron(this.state.user_data.lastCron);
         if(this.state.error)
             return(<div className="loading">Loading....</div>)
         else if(!this.state.isLoaded)
@@ -152,7 +154,7 @@ class App extends React.Component<any,any> {
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <Statsview user_data={this.state.user_data} />
                 <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits}/>
-                <this.CheckCron lastCron={this.state.user_data.lastCron}/>
+                {content}
                 </div>
             );
         }
