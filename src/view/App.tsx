@@ -37,7 +37,8 @@ class App extends React.Component<any,any> {
     CheckCron(lastCron: string) {
         let cronDate = new Date(lastCron).getDate();
         let now = new Date().getDate();
-        if (cronDate < now) {
+        console.log(cronDate, now);
+        if (cronDate != now) {
             return(
                 <div className="cron">
                     <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards. </div>
@@ -50,14 +51,17 @@ class App extends React.Component<any,any> {
             return null
         };
     }
-    runCron() {
+    async runCron() {
         console.log("running cron");
-        makeCronReq(this.username, this.credentials)
-        .then(res => {
+        try {
+            let response = await makeCronReq(this.username, this.credentials);
             this.setState({
                 needCron: false,
             })
-        });
+        } catch (error) {
+            console.log(error);
+            new Notice("There was an error running the cron. Please try again later.");
+        }
         this.reloadData();
     }    
     async reloadData() {
