@@ -5,8 +5,20 @@ import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
 
 class App extends React.Component<any,any> {
-    username = ""
-    credentials = ""
+    private _username = "";
+    public get username() {
+        return this._username;
+    }
+    public set username(value) {
+        this._username = value;
+    }
+    private _credentials = "";
+    public get credentials() {
+        return this._credentials;
+    }
+    public set credentials(value) {
+        this._credentials = value;
+    }
     constructor(props: any) {
         super(props)
         this.username = this.props.plugin.settings.userID
