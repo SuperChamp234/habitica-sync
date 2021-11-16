@@ -58,7 +58,6 @@ class App extends React.Component<any,any> {
             );
         }
         else {
-            console.log("Cron is up to date");
             return null
         };
     }
@@ -83,7 +82,6 @@ class App extends React.Component<any,any> {
 				new Notice('Login Failed, Please check credentials and try again!');
 			}
 			else {
-                console.log(result);
 				this.setState({
 					isLoaded: true,
 					user_data: result,
