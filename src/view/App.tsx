@@ -47,10 +47,9 @@ class App extends React.Component<any,any> {
 
     }
     CheckCron(lastCron: string) {
-        let cronDate = new Date(lastCron).getDate();
-        let now = new Date().getDate();
-        console.log(cronDate, now);
-        if (cronDate != now) {
+        let cronDate = new Date(lastCron);
+        let now = new Date();
+        if (cronDate.getDate() != now.getDate() || (cronDate.getMonth() != now.getMonth() || cronDate.getFullYear() != now.getFullYear())) {
             return(
                 <div className="cron">
                     <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards. </div>
