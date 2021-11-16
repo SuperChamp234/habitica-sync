@@ -27,7 +27,7 @@ export async function scoreTask(username: string, credentials: string, taskID: s
     })
     return(response)
 }
-export async function makeCronReq(username: string, credentials: string, taskID: string){
+export async function makeCronReq(username: string, credentials: string){
     const url = "https://habitica.com/api/v3/cron";
     const response = fetch(url, {
         method: 'POST',

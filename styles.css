@@ -159,3 +159,23 @@ ul li:not(.task-list-item)::before {
   font-weight: bold;
   text-shadow: 0 0 0.5em transparent;
 }
+body > div.app-container.is-left-sidedock-collapsed.is-right-sidedock-collapsed > div.horizontal-main-container > div > div.workspace-split.mod-horizontal.mod-right-split > div.workspace-tabs > div.workspace-leaf > div > div.view-content > div > div.cron > button {
+  margin: auto;
+  margin-bottom: 5px;
+}
+.cron {
+  display: inline-grid;
+  justify-content: center;
+  text-align: center;;
+  margin-top: 5px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 10px;
+  background-color: var(--background-secondary-alt);
+  border-radius: 10px;
+}
+#cronMessage {
+  margin: 20px;
+  margin-bottom: 10px;
+  color: var(--text-normal)
+}

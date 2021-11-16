@@ -1,17 +1,30 @@
 import * as React from "react";
 import { Notice } from "obsidian";
-import { getStats, scoreTask } from "./habiticaAPI"
+import { getStats, scoreTask, makeCronReq } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
 
 class App extends React.Component<any,any> {
-    username = ""
-    credentials = ""
+    private _username = "";
+    public get username() {
+        return this._username;
+    }
+    public set username(value) {
+        this._username = value;
+    }
+    private _credentials = "";
+    public get credentials() {
+        return this._credentials;
+    }
+    public set credentials(value) {
+        this._credentials = value;
+    }
     constructor(props: any) {
         super(props)
         this.username = this.props.plugin.settings.userID
         this.credentials = this.props.plugin.settings.apiToken
         this.state = {
+            needCron: false,
             isLoaded: false,
             user_data: {
                 profile: {
@@ -20,18 +33,48 @@ class App extends React.Component<any,any> {
                 stats: {
                     hp: 0,
                     lvl: 0,
-                }
+                },
+                lastCron: "",
             },
             todos: [],
             dailys: [],
             habits: [],
         }
-        this.handleChangeTodos = this.handleChangeTodos.bind(this)
-        this.handleChangeDailys = this.handleChangeDailys.bind(this)
-        this.handleChangeHabits = this.handleChangeHabits.bind(this)
-
+        this.handleChangeTodos = this.handleChangeTodos.bind(this);
+        this.handleChangeDailys = this.handleChangeDailys.bind(this);
+        this.handleChangeHabits = this.handleChangeHabits.bind(this);
+        this.runCron = this.runCron.bind(this);
 
     }
+    CheckCron(lastCron: string) {
+        let cronDate = new Date(lastCron);
+        let now = new Date();
+        if (cronDate.getDate() != now.getDate() || (cronDate.getMonth() != now.getMonth() || cronDate.getFullYear() != now.getFullYear())) {
+            return(
+                <div className="cron">
+                    <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards. </div>
+                    <button onClick={this.runCron}>Continue</button>
+                </div>
+            );
+        }
+        else {
+            console.log("Cron is up to date");
+            return null
+        };
+    }
+    async runCron() {
+        console.log("running cron");
+        try {
+            let response = await makeCronReq(this.username, this.credentials);
+            this.setState({
+                needCron: false,
+            })
+        } catch (error) {
+            console.log(error);
+            new Notice("There was an error running the cron. Please try again later.");
+        }
+        this.reloadData();
+    }    
     async reloadData() {
         try {
 			let response = await getStats(this.username, this.credentials);
@@ -40,6 +83,7 @@ class App extends React.Component<any,any> {
 				new Notice('Login Failed, Please check credentials and try again!');
 			}
 			else {
+                console.log(result);
 				this.setState({
 					isLoaded: true,
 					user_data: result,
@@ -115,6 +159,7 @@ class App extends React.Component<any,any> {
     }
 
     render(){
+        let content = this.CheckCron(this.state.user_data.lastCron);
         if(this.state.error)
             return(<div className="loading">Loading....</div>)
         else if(!this.state.isLoaded)
@@ -124,6 +169,7 @@ class App extends React.Component<any,any> {
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <Statsview user_data={this.state.user_data} />
                 <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits}/>
+                {content}
                 </div>
             );
         }
