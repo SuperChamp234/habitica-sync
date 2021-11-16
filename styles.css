@@ -23,7 +23,7 @@
 .habit-text {
   text-align: center !important;
   padding: 0px;
-  width: 80px;
+  width: 50%;
   margin-right: 20px;
 }
 
@@ -148,4 +148,34 @@ input[type=checkbox]:focus {
 
 .react-tabs__tab-panel--selected {
   display: block;
+}
+ul li:not(.task-list-item)::before {
+  content: "•";
+  color: transparent;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  padding: 0;
+  font-weight: bold;
+  text-shadow: 0 0 0.5em transparent;
+}
+body > div.app-container.is-left-sidedock-collapsed.is-right-sidedock-collapsed > div.horizontal-main-container > div > div.workspace-split.mod-horizontal.mod-right-split > div.workspace-tabs > div.workspace-leaf > div > div.view-content > div > div.cron > button {
+  margin: auto;
+  margin-bottom: 5px;
+}
+.cron {
+  display: inline-grid;
+  justify-content: center;
+  text-align: center;;
+  margin-top: 5px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 10px;
+  background-color: var(--background-secondary-alt);
+  border-radius: 10px;
+}
+#cronMessage {
+  margin: 20px;
+  margin-bottom: 10px;
+  color: var(--text-normal)
 }
