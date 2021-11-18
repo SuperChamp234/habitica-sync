@@ -32,7 +32,7 @@ export class HabiticaSyncView extends ItemView {
         )
     }
 
-    async onClose(){
-        ReactDOM.unmountComponentAtNode(this.containerEl.children[1]);
-    }
+    // async onClose(){
+    //     ReactDOM.unmountComponentAtNode(this.containerEl.children[1]);
+    // }
 }
