@@ -1,5 +1,5 @@
 * {
-  margin: 0;
+  /* margin: 0; */
   padding: 0;
 }
 
@@ -49,7 +49,7 @@
 .habit-plus {
   /* background-color: #fff; */
   border: none;
-  color: black;
+  /* color: black; */
   padding: 7px 5px;
   text-align: center;
   text-decoration: none;
@@ -60,7 +60,7 @@
   /* background-color: #fff; */
   /* border-radius: 50%; */
   border: none;
-  color: black;
+  /* color: black; */
   padding: 7px 5px;
   text-align: center;
   text-decoration: none;

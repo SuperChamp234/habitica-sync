@@ -9,7 +9,7 @@ export default function Index(props: any){
     }
     else {
         const allRewards = props.rewards.map((reward: any) => {
-            return <RewardItem key={reward.id} id={reward.id} reward_text={reward.text} reward_value={reward.value} onChange={props.onChange}/>
+            return <RewardItem key={reward.id} id={reward.id} reward_text={reward.text} reward_notes={reward.notes} reward_value={reward.value} onChange={props.onChange}/>
         })
         const display = <div id="classDisplay">
                             <ul>{allRewards}</ul>

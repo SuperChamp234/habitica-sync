@@ -9,7 +9,7 @@ export default function Index(props: any){
     }
     else {
         const allHabits = props.habits.map((habit: any) => {
-            return <HabitItem key={habit.id} id={habit.id} habit_text={habit.text} upCount={habit.counterUp} downCount={habit.counterDown} onChange={props.onChange}/>
+            return <HabitItem key={habit.id} id={habit.id} habit_text={habit.text} habit_notes={habit.notes} upCount={habit.counterUp} downCount={habit.counterDown} onChange={props.onChange}/>
         })
         const display = <div id="classDisplay">
                             <ul>{allHabits}</ul>

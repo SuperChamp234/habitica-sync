@@ -15,7 +15,7 @@ export default class HabiticaSync extends Plugin {
     view: HabiticaSyncView;
 
     async onload() {
-        console.log("正在加载habitica-sync")
+        console.log("load plugin: habitica-sync")
         await this.loadSettings();
         this.addSettingTab(new HabiticaSyncSettingsTab(this.app, this));
         this.registerView(
@@ -33,6 +33,8 @@ export default class HabiticaSync extends Plugin {
                 this.activateView();
             }
         });
+        this.activateView();
+        
     }
     async loadSettings() {
         this.settings = Object.assign(DEFAULT_SETTINGS, await this.loadData())
@@ -40,9 +42,10 @@ export default class HabiticaSync extends Plugin {
     async saveSettings() {
         await this.saveData(this.settings);
     }
+
     async onunload() {
         // await this.view.onClose();
-
+    
         this.app.workspace
             .getLeavesOfType(VIEW_TYPE)
             .forEach((leaf) => leaf.detach());
