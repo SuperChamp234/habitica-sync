@@ -90,6 +90,7 @@ input[type=checkbox]:focus {
 .plugin-root {
   min-width: 260px;
   display: grid;
+  grid-template-rows: auto 1fr auto;
   height: inherit;
 }
 
