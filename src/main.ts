@@ -34,7 +34,7 @@ export default class HabiticaSync extends Plugin {
                 this.activateView();
             }
         });
-        this.activateView();
+        // this.activateView();
         
     }
     async loadSettings() {
@@ -45,7 +45,7 @@ export default class HabiticaSync extends Plugin {
     }
 
     async onunload() {
-        // await this.view.onClose();
+        await this.view.onClose();
     
         this.app.workspace
             .getLeavesOfType(VIEW_TYPE)

@@ -195,8 +195,12 @@ class App extends React.Component<any, any> {
             return (<div className="plugin-root">
                 {content}
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<<<<<<< HEAD
                 <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} settings = {this.props.plugin.settings} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards}/>
                 <div></div>
+=======
+                <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards}/>
+>>>>>>> 54e6000eb8811968a7e3082a4995c6e40f96654e
                 <Statsview user_data={this.state.user_data} />
             </div>
             );
