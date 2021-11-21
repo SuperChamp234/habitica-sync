@@ -51,15 +51,12 @@ class App extends React.Component<any, any> {
         let cronDate = new Date(lastCron);
         let now = new Date();
         if (cronDate.getDate() != now.getDate() || (cronDate.getMonth() != now.getMonth() || cronDate.getFullYear() != now.getFullYear())) {
-            // return (
-            //     <div className="cron">
-            //         <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards. </div>
-            //         <button onClick={this.runCron}>Continue</button>
-            //     </div>
-            // );
             return (
-                <div className="cron"></div>
-            )
+                <div className="cron">
+                    <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards.</div>
+                    <button id="cronButton" onClick={this.runCron}>Continue</button>
+                </div>
+            );
         }
         else {
             return null
@@ -196,9 +193,9 @@ class App extends React.Component<any, any> {
             return <div className="loading">Loading....</div>
         else {
             return (<div className="plugin-root">
+                {content}
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards}/>
-                {content}
                 <div></div>
                 <Statsview user_data={this.state.user_data} />
             </div>
