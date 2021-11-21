@@ -9,11 +9,11 @@ export default function Index(props: any){
     else {
         const incompleteDailies = props.dailys.map((daily: any) => {
                 if(!daily.completed)
-                    return <DailyItem key={daily.id} id={daily.id}daily_text={daily.text} onChange={props.onChange} completed={daily.completed}/>
+                    return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} daily_notes={daily.notes} onChange={props.onChange} completed={daily.completed}/>
         })
         const completedDailies = props.dailys.map((daily: any) => {
             if(daily.completed)
-                return <DailyItem key={daily.id} id={daily.id}daily_text={daily.text} onChange={props.onChange} completed={daily.completed}/>
+                return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} daily_notes={daily.notes} onChange={props.onChange} completed={daily.completed}/>
         })
         const display = <div id="classDisplay">
                             <Tabs>

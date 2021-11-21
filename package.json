@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "dev": "rollup --config rollup.config.js -w",
-    "build": "rollup --config rollup.config.js --environment BUILD:production"
+    "build": "rollup --config rollup.config.js --environment BUILD:production",
+    "dev2": "obsidian-plugin dev src/main.ts"
   },
   "keywords": [],
   "author": "Leonard and Ran",
@@ -21,6 +22,7 @@
     "css-loader": "^6.4.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "obsidian": "^0.12.0",
+    "obsidian-plugin-cli": "^0.4.3",
     "rollup": "^2.32.1",
     "style-loader": "^3.3.0",
     "tslib": "^2.2.0",
@@ -32,6 +34,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-emoji-render": "^1.2.4",
+    "react-markdown": "^7.1.0",
     "react-tabs": "^3.2.2"
   }
 }

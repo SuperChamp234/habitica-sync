@@ -1,3 +1,8 @@
+* {
+  /* margin: 0; */
+  padding: 0;
+}
+
 
 #profile-name {
   font-size: x-large;
@@ -5,7 +10,8 @@
   padding-bottom: 3%;
 }
 .stats {
-  padding-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .todo-item {
@@ -13,25 +19,38 @@
   justify-content: flex-start;
   align-items: center;
   padding: 0px 0px 0;
-  width: 80%;
+  width: 100%;
   border-bottom: 1px solid #cecece;
   font-family: Roboto, sans-serif;
   font-weight: normal;
   font-size: 16px;
 }
 
+.reward-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 0px 0;
+  width: 100%;
+  border-bottom: 1px solid #cecece;
+  font-family: Roboto, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+
 .habit-text {
-  text-align: center !important;
+  text-align: left !important;
   padding: 0px;
-  width: 50%;
+  width: 80%;
   margin-right: 20px;
 }
 
 .habit-plus {
   /* background-color: #fff; */
   border: none;
-  color: white;
-  padding: 7px 10px;
+  /* color: black; */
+  padding: 7px 5px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
@@ -41,8 +60,8 @@
   /* background-color: #fff; */
   /* border-radius: 50%; */
   border: none;
-  color: white;
-  padding: 7px 10px;
+  /* color: black; */
+  padding: 7px 5px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
@@ -70,8 +89,19 @@ input[type=checkbox]:focus {
   outline: 0;
 }
 
+.task-view {
+  overflow: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+
 .plugin-root {
   min-width: 260px;
+  display: grid;
+  grid-template-rows: 93% 5% 2%;
+  height: inherit;
 }
 
 .substats {
@@ -144,6 +174,7 @@ input[type=checkbox]:focus {
 
 .react-tabs__tab-panel {
   display: none;
+  left: 0px;
 }
 
 .react-tabs__tab-panel--selected {
