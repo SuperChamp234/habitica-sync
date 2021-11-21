@@ -1,10 +1,11 @@
 import * as React from "react";
 import HabitItem from "./HabitItem"
+import { useTranslation, Trans, Translation } from 'react-i18next'
 
 export default function Index(props: any){
     if(props.habits == undefined) {
         return (<div id="classDisplay">
-                    No habits present.
+                    <Trans>No habits present.</Trans>
                 </div>)
     }
     else {

@@ -9,7 +9,6 @@ package-lock.json
 # yarn
 yarn.lock
 
-
 *.js.map
 
 # obsidian

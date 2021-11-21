@@ -1,10 +1,11 @@
 import * as React from "react";
 import RewardItem from "./RewardItem"
+import { useTranslation, Trans, Translation } from 'react-i18next'
 
 export default function Index(props: any){
     if(props.rewards == undefined) {
         return (<div id="classDisplay">
-                    No Rewards present.
+                    <Trans>No Rewards present.</Trans>
                 </div>)
     }
     else {

@@ -15,7 +15,7 @@ export default class HabiticaSync extends Plugin {
     view: HabiticaSyncView;
 
     async onload() {
-        console.log("load plugin: habitica-sync")
+        // console.log("load plugin: habitica-sync")
         await this.loadSettings();
         this.addSettingTab(new HabiticaSyncSettingsTab(this.app, this));
         this.registerView(

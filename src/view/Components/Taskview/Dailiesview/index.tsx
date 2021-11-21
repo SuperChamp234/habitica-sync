@@ -1,10 +1,11 @@
 import * as React from "react";
 import DailyItem from "./DailyItem"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { useTranslation, Trans, Translation } from 'react-i18next'
 
 export default function Index(props: any){
     if(props.dailys == undefined) {
-        return <div id="classDisplay">No Dailies Present</div>
+        return <div id="classDisplay"><Trans>No Dailies Present</Trans></div>
     }
     else {
         const incompleteDailies = props.dailys.map((daily: any) => {
@@ -18,8 +19,8 @@ export default function Index(props: any){
         const display = <div id="classDisplay">
                             <Tabs>
                             <TabList>
-                                <Tab>Active</Tab>
-                                <Tab>Completed</Tab>
+                                <Tab><Trans>Active</Trans></Tab>
+                                <Tab><Trans>Completed</Trans></Tab>
                             </TabList>
                             <TabPanel>
                                 <ul>{incompleteDailies}</ul>

@@ -6,6 +6,8 @@
     "module": "ESNext",
     "target": "es6",
     "jsx": "react",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "moduleResolution": "node",
     "importHelpers": true,

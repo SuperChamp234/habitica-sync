@@ -1,6 +1,7 @@
 import * as React from "react";
 import TodoItem from "./TodoItem"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { useTranslation, Trans, Translation } from 'react-i18next'
 
 export default function Index(props: any){
     if(props.todos == undefined) {
@@ -18,8 +19,8 @@ export default function Index(props: any){
         const display = <div id="classDisplay">
                             <Tabs>
                             <TabList>
-                                <Tab>Active</Tab>
-                                <Tab>Completed</Tab>
+                                <Tab><Trans>Active</Trans></Tab>
+                                <Tab><Trans>Completed</Trans></Tab>
                             </TabList>
                             <TabPanel>
                                 <ul>{incompleteTodos}</ul>

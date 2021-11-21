@@ -3,6 +3,7 @@ import { Notice } from "obsidian";
 import { getStats, scoreTask, makeCronReq, costReward } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
+import "../i18n"
 
 class App extends React.Component<any, any> {
     private _username = "";
@@ -56,7 +57,7 @@ class App extends React.Component<any, any> {
             //         <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards. </div>
             //         <button onClick={this.runCron}>Continue</button>
             //     </div>
-            // );
+            // ); 
             return (
                 <div className="cron"></div>
             )
