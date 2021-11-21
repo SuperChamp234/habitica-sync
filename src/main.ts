@@ -5,6 +5,7 @@ import { HabiticaSyncView, VIEW_TYPE} from "./view"
 interface HabiticaSyncSettings {
     userID: string
     apiToken: string
+    showTaskDescription: boolean
 }
 const DEFAULT_SETTINGS: Partial<HabiticaSyncSettings> = {
     userID: "",

@@ -8,8 +8,14 @@ export default function Index(props: any){
     }
     else {
         const incompleteTodos = props.todos.map((todo: any) => {
-                if(!todo.completed)
-                    return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} todo_notes={todo.notes} onChange={props.onChange} completed={todo.completed}/>
+                if(!todo.completed) {
+                    if (props.settings.showTaskDescription) {
+                        return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} todo_notes={todo.notes} onChange={props.onChange} completed={todo.completed}/>
+                    } else {
+                        return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} onChange={props.onChange} completed={todo.completed}/>
+                    }
+                }
+                    
         })
         const completedTodos = props.todos.map((todo: any) => {
             if(todo.completed)

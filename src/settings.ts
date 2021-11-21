@@ -38,5 +38,18 @@ export class HabiticaSyncSettingsTab extends PluginSettingTab {
                     await this.plugin.saveSettings();
                 })
         );
+
+        new Setting(containerEl)
+        .setName("Show Task Descriptions")
+        .setDesc("Updates require pane re-opening")
+        .addToggle(cb => {
+            cb
+                .setValue(this.plugin.settings.showTaskDescription)
+                .onChange(async (isEnable) => {
+                    this.plugin.settings.showTaskDescription = isEnable;
+                    await this.plugin.saveSettings();
+                })
+            });
+        
     }
 }
