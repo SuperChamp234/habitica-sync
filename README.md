@@ -26,10 +26,6 @@ The following two inputs help fetch your user data to be displayed in the Obsidi
 - **Habitica Token API:** You can find this by clicking on the "User" icon in the top right of the Habitica webapp, "Settings", then "API"
 
 
-**Show Task Descriptions:** Toggles whether description/notes for tasks will be shown or not
-
-
-
 ## Roadmap
 We will be implementing additional features including:
 - Add/delete/customize tasks and habits
