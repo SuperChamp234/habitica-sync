@@ -16,6 +16,14 @@
   justify-content: space-between;
 }
 
+.modify-todo {
+  align-self: center;
+}
+
+.delete-todo {
+  align-self: center;
+}
+
 .todo-item {
     display: grid;
     grid-template-columns: 1fr 30fr 1fr 1fr;
@@ -31,6 +39,7 @@
 
 p {
     margin: 0;
+    padding: 5px;
 }
 
 .reward-item {
@@ -105,6 +114,7 @@ input[type=checkbox] {
     padding: 5px 15px;
     font-size: 15px;
     border: 1px solid #aaa;
+    white-space: nowrap;
 }
 
 input[type=checkbox]:focus {
@@ -216,7 +226,9 @@ ul li:not(.task-list-item)::before {
 body > div.app-container.is-left-sidedock-collapsed.is-right-sidedock-collapsed > div.horizontal-main-container > div > div.workspace-split.mod-horizontal.mod-right-split > div.workspace-tabs > div.workspace-leaf > div > div.view-content > div > div.cron > button {
   margin: auto;
   margin-bottom: 5px;
-  white-space: nowrap
+  white-space: nowrap;
+  padding: 5px 5px;
+  margin-right: 0;
 }
 .cron {
   display: inline-grid;

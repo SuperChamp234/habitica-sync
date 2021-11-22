@@ -3,7 +3,6 @@ import Dailiesview from "./Dailiesview"
 import Habitsview from "./Habitsview"
 import Todoview from "./Todoview"
 import Rewardview from "./Rewardview"
-import Addview from "./Addview"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { useTranslation, Trans, Translation } from 'react-i18next'
 
