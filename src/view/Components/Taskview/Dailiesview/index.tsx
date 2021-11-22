@@ -22,6 +22,11 @@ export default function Index(props: any){
                                 <Tab><Trans>Active</Trans></Tab>
                                 <Tab><Trans>Completed</Trans></Tab>
                             </TabList>
+                            <div className="add-task-input">
+                                <input type="text">
+                                </input>
+                                <button className="submit-button"><Trans>submit</Trans></button>
+                            </div>
                             <TabPanel>
                                 <ul>{incompleteDailies}</ul>
                             </TabPanel>
@@ -29,6 +34,7 @@ export default function Index(props: any){
                                 <ul>{completedDailies}</ul>
                             </TabPanel>
                             </Tabs>
+                            
                         </div>
         return(display);
     }

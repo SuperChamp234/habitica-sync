@@ -13,6 +13,11 @@ export default function Index(props: any){
             return <RewardItem key={reward.id} id={reward.id} reward_text={reward.text} reward_notes={reward.notes} reward_value={reward.value} onChange={props.onChange}/>
         })
         const display = <div id="classDisplay">
+                            <div className="add-task-input">
+                                <input type="text">
+                                </input>
+                                <button className="submit-button"><Trans>submit</Trans></button>
+                            </div>
                             <ul>{allRewards}</ul>
                         </div>
 

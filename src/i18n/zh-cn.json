@@ -1,10 +1,15 @@
 {
-    "Active":"进行中",
-    "Completed":"已完成",
-    "HP":"生命值",
-    "LEVEL":"等级",
-    "GOLD":"金币",
-    "No Dailies Present":"目前每日任务为空",
-    "No habits present.":"目前习惯为空",
-    "No Rewards present.":"目前奖励为空"
+    "Active": "进行中",
+    "Completed": "已完成",
+    "HP": "生命值",
+    "LEVEL": "等级",
+    "GOLD": "金币",
+    "title": "标题",
+    "notes": "备注",
+    "type": "类型",
+    "Daily": "每日任务",
+    "submit": "添加",
+    "No Dailies Present": "目前每日任务为空",
+    "No habits present.": "目前习惯为空",
+    "No Rewards present.": "目前奖励为空"
 }

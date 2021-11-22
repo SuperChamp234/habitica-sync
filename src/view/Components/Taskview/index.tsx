@@ -3,13 +3,14 @@ import Dailiesview from "./Dailiesview"
 import Habitsview from "./Habitsview"
 import Todoview from "./Todoview"
 import Rewardview from "./Rewardview"
+import Addview from "./Addview"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { useTranslation, Trans, Translation } from 'react-i18next'
 
 export default function Index(props: any){
     const display = <div className="task-view">
                     <Tabs>
                         <TabList>
-
                             <Tab>
                                 <span className="material-icons md-24">today</span>
                             </Tab>

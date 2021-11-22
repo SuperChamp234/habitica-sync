@@ -13,6 +13,11 @@ export default function Index(props: any){
             return <HabitItem key={habit.id} id={habit.id} habit_text={habit.text} habit_notes={habit.notes} upCount={habit.counterUp} downCount={habit.counterDown} onChange={props.onChange}/>
         })
         const display = <div id="classDisplay">
+                            <div className="add-task-input">
+                                <input type="text">
+                                </input>
+                                <button className="submit-button"><Trans>submit</Trans></button>
+                            </div>
                             <ul>{allHabits}</ul>
                         </div>
 

@@ -1,10 +1,10 @@
 {
-    "Active":"Active",
-    "Completed":"Completed",
-    "HP":"HP",
-    "LEVEL":"LEVEL",
-    "GOLD":"GOLD",
-    "No Dailies Present":"No Dailies Present",
-    "No habits present.":"No habits present.",
-    "No Rewards present.":"No Rewards present."
+    "Active": "Active",
+    "Completed": "Completed",
+    "HP": "HP",
+    "LEVEL": "LEVEL",
+    "GOLD": "GOLD",
+    "No Dailies Present": "No Dailies Present",
+    "No habits present.": "No habits present.",
+    "No Rewards present.": "No Rewards present."
 }

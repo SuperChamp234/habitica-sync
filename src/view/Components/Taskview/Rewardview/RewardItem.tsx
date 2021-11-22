@@ -9,7 +9,12 @@ function RewardItem(props: any) {
             <p className="reward-text"><Emoji text={props.reward_text}></Emoji></p>
             <ReactMarkdown children={props.reward_notes} />
             </div>
-            
+            <button className="modify-reward" id={props.id}>
+                <span className="material-icons md-24">create</span>
+            </button>
+            <button className="delete-reward" id={props.id}>
+                <span className="material-icons md-24">clear</span>
+            </button>
         </div>
     )
 }

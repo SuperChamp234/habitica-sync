@@ -2,6 +2,9 @@
   padding: 0;
 }
 
+.add-task-input {
+  display: flex;
+}
 
 #profile-name {
   font-size: x-large;
@@ -14,8 +17,25 @@
 }
 
 .todo-item {
-  display: flex;
-  justify-content: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 30fr 1fr 1fr;
+    justify-content: left;
+    align-items: flex-start;
+    padding: 0px 0px 0;
+    width: 100%;
+    border-bottom: 1px solid #cecece;
+    font-family: Roboto, sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+p {
+    margin: 0;
+}
+
+.reward-item {
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr 1fr;
   align-items: center;
   padding: 0px 0px 0;
   width: 100%;
@@ -25,16 +45,8 @@
   font-size: 16px;
 }
 
-.reward-item {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0px 0px 0;
-  width: 100%;
-  border-bottom: 1px solid #cecece;
-  font-family: Roboto, sans-serif;
-  font-weight: normal;
-  font-size: 16px;
+.reward-click {
+  padding: 5px 15px;
 }
 
 
@@ -67,8 +79,8 @@
 }
 
 .habit-item {
-  display: flex;
-  /* justify-content: center; */
+  display: grid;
+  grid-template-columns: 2fr 2fr 10fr 2fr 2fr;
   align-content: space-between;
   align-items: center;
   padding: 0px 0px 0;
@@ -82,6 +94,17 @@
 
 input[type=checkbox] {
   margin-right: 10px;
+  align-self: center;
+}
+
+.todo-content {
+  align-self: center;
+}
+
+.submit-button {
+    padding: 5px 15px;
+    font-size: 15px;
+    border: 1px solid #aaa;
 }
 
 input[type=checkbox]:focus {
@@ -105,6 +128,7 @@ input[type=checkbox]:focus {
 
 .substats {
   font-size: medium;
+
 }
 
 /* react-tabs internal file :wink: */
@@ -128,7 +152,7 @@ input[type=checkbox]:focus {
 
 .react-tabs__tab-list {
   border-bottom: 1px solid #aaa;
-  margin: 0 0 10px;
+  margin: 0 0 5px;
   padding: 0;
 }
 
@@ -192,6 +216,7 @@ ul li:not(.task-list-item)::before {
 body > div.app-container.is-left-sidedock-collapsed.is-right-sidedock-collapsed > div.horizontal-main-container > div > div.workspace-split.mod-horizontal.mod-right-split > div.workspace-tabs > div.workspace-leaf > div > div.view-content > div > div.cron > button {
   margin: auto;
   margin-bottom: 5px;
+  white-space: nowrap
 }
 .cron {
   display: inline-grid;
