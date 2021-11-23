@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Notice } from "obsidian";
-import { getStats, scoreTask, makeCronReq, costReward } from "./habiticaAPI"
+import { getStats, scoreTask, makeCronReq, costReward, addTask } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
 import "../i18n"
@@ -52,15 +52,11 @@ class App extends React.Component<any, any> {
         let cronDate = new Date(lastCron);
         let now = new Date();
         if (cronDate.getDate() != now.getDate() || (cronDate.getMonth() != now.getMonth() || cronDate.getFullYear() != now.getFullYear())) {
-            // return (
-            //     <div className="cron">
-            //         <div id="cronMessage"> Welcome back! Please check your tasks for the last day and hit continue to get your daily rewards. </div>
-            //         <button onClick={this.runCron}>Continue</button>
-            //     </div>
-            // ); 
             return (
-                <div className="cron"></div>
-            )
+                <div className="cron">
+                    <button onClick={this.runCron}>Refresh</button>
+                </div>
+            );
         }
         else {
             return null
@@ -136,6 +132,23 @@ class App extends React.Component<any, any> {
         }
     }
 
+    async sendDaily(type: string, title: string, message: string) {
+        try {
+            let response = await addTask(this.username, this.credentials, title, type);
+            let result = await response.json();
+            if (result.success === true) {
+                new Notice(message);
+                this.reloadData();
+            } else {
+                new Notice("Resyncing, please try again");
+                this.reloadData();
+            }
+        } catch (e) {
+            console.log(e);
+            new Notice("API Error: Please check credentials")
+        }
+    }
+
     handleChangeTodos(event: any) {
         this.state.tasks.todos.forEach((element: any) => {
             if (element.id == event.target.id) {
@@ -162,6 +175,8 @@ class App extends React.Component<any, any> {
             }
         })
     }
+
+
     handleChangeHabits(event: any) {
         const target_id = event.target.id.slice(4)
         if (event.target.id.slice(0, 4) == "plus") {
@@ -198,7 +213,7 @@ class App extends React.Component<any, any> {
         else {
             return (<div className="plugin-root">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-                <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards}/>
+                <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards} />
                 {content}
                 <div></div>
                 <Statsview user_data={this.state.user_data} />

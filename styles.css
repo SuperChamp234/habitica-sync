@@ -121,10 +121,6 @@ input[type=checkbox]:focus {
   outline: 0;
 }
 
-.task-view {
-  overflow: scroll;
-}
-
 ::-webkit-scrollbar {
   display: none; /* Chrome Safari */
 }
@@ -132,13 +128,20 @@ input[type=checkbox]:focus {
 .plugin-root {
   min-width: 260px;
   display: grid;
-  grid-template-rows: 93% 5% 2%;
+  grid-template-rows: 97% 1% 0.5%;
   height: inherit;
+}
+
+#classDisplay {
+  height: 100%;
 }
 
 .substats {
   font-size: medium;
+}
 
+ul {
+  margin: 0;
 }
 
 /* react-tabs internal file :wink: */
@@ -157,7 +160,7 @@ input[type=checkbox]:focus {
 
 .react-tabs {
   -webkit-tap-highlight-color: transparent;
-  
+  height: 100%;
 }
 
 .react-tabs__tab-list {
@@ -208,6 +211,8 @@ input[type=checkbox]:focus {
 .react-tabs__tab-panel {
   display: none;
   left: 0px;
+  height: 88%;
+  overflow: scroll;
 }
 
 .react-tabs__tab-panel--selected {
@@ -223,7 +228,7 @@ ul li:not(.task-list-item)::before {
   font-weight: bold;
   text-shadow: 0 0 0.5em transparent;
 }
-body > div.app-container.is-left-sidedock-collapsed.is-right-sidedock-collapsed > div.horizontal-main-container > div > div.workspace-split.mod-horizontal.mod-right-split > div.workspace-tabs > div.workspace-leaf > div > div.view-content > div > div.cron > button {
+button {
   margin: auto;
   margin-bottom: 5px;
   white-space: nowrap;
@@ -238,7 +243,6 @@ body > div.app-container.is-left-sidedock-collapsed.is-right-sidedock-collapsed 
   margin-left: 10%;
   margin-right: 10%;
   margin-bottom: 10px;
-  background-color: var(--background-secondary-alt);
   border-radius: 10px;
 }
 #cronMessage {

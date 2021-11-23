@@ -56,7 +56,7 @@ export async function costReward(username: string, credentials: string, taskID: 
 }
 
 
-export async function addDaily(username: string, credentials: string, title: string) {
+export async function addTask(username: string, credentials: string, title: string, type: string) {
     const url = "https://habitica.com/api/v4/tasks/user".concat(title)
     const response = fetch(url, {
         method: 'POST',
@@ -66,7 +66,7 @@ export async function addDaily(username: string, credentials: string, title: str
             "x-api-user": username,
             "x-api-key": credentials,
         },
-        body: JSON.stringify({type: "daliy", text: title})
+        body: JSON.stringify({type: type, text: title})
     })
     return(response)
 }
