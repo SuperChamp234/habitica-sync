@@ -22,13 +22,14 @@
     "css-loader": "^6.4.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "obsidian": "^0.12.0",
-    "obsidian-plugin-cli": "^0.4.3",
+    "obsidian-plugin-cli": "^0.8.1",
     "rollup": "^2.32.1",
     "style-loader": "^3.3.0",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.2.0",
     "i18next": "^21.5.2",
     "i18next-browser-languagedetector": "^6.1.2",
     "node": "^16.10.0",

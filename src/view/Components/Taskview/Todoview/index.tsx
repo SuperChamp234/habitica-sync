@@ -2,6 +2,7 @@ import * as React from "react";
 import TodoItem from "./TodoItem"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { useTranslation, Trans, Translation } from 'react-i18next'
+import AddTask from "../AddTask";
 
 export default function Index(props: any){
     if(props.todos == undefined) {
@@ -22,11 +23,7 @@ export default function Index(props: any){
                                 <Tab><Trans>Active</Trans></Tab>
                                 <Tab><Trans>Completed</Trans></Tab>
                             </TabList>
-                            <div className="add-task-input">
-                                <input type="text">
-                                </input>
-                                <button className="submit-button"><Trans>submit</Trans></button>
-                            </div>
+                            <AddTask type="todo"></AddTask>
                             <TabPanel>
                                 <ul>{incompleteTodos}</ul>
                             </TabPanel>

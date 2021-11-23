@@ -7,6 +7,7 @@ type FormData = {
 };
 
 export default function Index(props: any) {
+  console.log(props)
   const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
   const onSubmit = handleSubmit(data => {
     const url = "https://habitica.com/api/v4/tasks/user"

@@ -15,12 +15,12 @@ function HabitItem(props: any) {
                 <p className="habit-text"><Emoji text={props.habit_text}></Emoji></p>
                 <ReactMarkdown children={props.habit_notes} />
             </div>
-                <button className="modify-habit" id={props.id}>
-                    <span className="material-icons md-24">create</span>
+            <button className="task-operation" >
+                    <span className="material-icons md-24" id={props.id} onClick={props.onChange}>create</span>
                 </button>
-                <button className="delete-habit" id={props.id}>
-                    <span className="material-icons md-24">clear</span>
-                </button>
+                <button className="task-operation">
+                    <span className="material-icons md-24" id={props.id} onClick={props.onChange}>clear</span>
+            </button>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import * as React from "react";
 import HabitItem from "./HabitItem"
 import { useTranslation, Trans, Translation } from 'react-i18next'
+import AddTask from "../AddTask";
 
 export default function Index(props: any){
     if(props.habits == undefined) {
@@ -13,11 +14,7 @@ export default function Index(props: any){
             return <HabitItem key={habit.id} id={habit.id} habit_text={habit.text} habit_notes={habit.notes} upCount={habit.counterUp} downCount={habit.counterDown} onChange={props.onChange}/>
         })
         const display = <div id="classDisplay">
-                            <div className="add-task-input">
-                                <input type="text">
-                                </input>
-                                <button className="submit-button"><Trans>submit</Trans></button>
-                            </div>
+                        <AddTask type="habit"></AddTask>
                             <ul>{allHabits}</ul>
                         </div>
 

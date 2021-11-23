@@ -10,11 +10,11 @@ function TodoItem(props: any) {
                 <p><Emoji text={props.todo_text}></Emoji></p>
                 <ReactMarkdown children={props.todo_notes} />
             </div>
-            <button className="modify-todo" id={props.id}>
-                <span className="material-icons md-24">create</span>
+            <button className="task-operation" >
+                <span className="material-icons md-24" id={props.id} onClick={props.onChange}>create</span>
             </button>
-            <button className="delete-todo" id={props.id}>
-                <span className="material-icons md-24">clear</span>
+            <button className="task-operation">
+                <span className="material-icons md-24" id={props.id} onClick={props.onChange}>clear</span>
             </button>
         </div>
     )

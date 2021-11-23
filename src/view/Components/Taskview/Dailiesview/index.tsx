@@ -25,7 +25,7 @@ export default function Index(props: any){
                                 <Tab><Trans>Active</Trans></Tab>
                                 <Tab><Trans>Completed</Trans></Tab>
                             </TabList>
-                            <AddTask type="daily"></AddTask>
+                            <AddTask type="daily" onChange={props.onChange}></AddTask>
                             <TabPanel>
                                 <ul>{incompleteDailies}</ul>
                             </TabPanel>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Notice } from "obsidian";
-import { getStats, scoreTask, makeCronReq, costReward, addTask } from "./habiticaAPI"
+import { getStats, scoreTask, makeCronReq, costReward, addTask, deleteTask } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
 import "../i18n"
@@ -149,16 +149,41 @@ class App extends React.Component<any, any> {
         }
     }
 
+    async sendDeleteTask(id: string, message: string) {
+        try {
+            let response = await deleteTask(this.username, this.credentials, id);
+            let result = await response.json();
+            if (result.success === true) {
+                new Notice(message);
+                this.reloadData();
+            } else {
+                new Notice("Resyncing, please try again");
+                this.reloadData();
+            }
+        } catch (e) {
+            console.log(e);
+            new Notice("API Error: Please check credentials")
+        }        
+    }
+
     handleChangeTodos(event: any) {
         this.state.tasks.todos.forEach((element: any) => {
             if (element.id == event.target.id) {
-                if (!element.completed) {
-                    this.sendScore(event.target.id, "up", "Checked!")
+                if ( event.type == "click" ) {
+                    console.log(event)
+                    if ( event.target.innerText == 'clear' ) {
+                        this.sendDeleteTask(event.target.id, "Deleted!")
+                    }
                 } else {
-                    this.sendScore(event.target.id, "down", "Un-Checked!")
+                    if (!element.completed) {
+                        this.sendScore(event.target.id, "up", "Checked!")
+                    } else {
+                        this.sendScore(event.target.id, "down", "Un-Checked!")
+                    }
                 }
             }
         })
+        
     }
 
 
@@ -166,8 +191,11 @@ class App extends React.Component<any, any> {
         this.state.tasks.dailys.forEach((element: any) => {
             if (element.id == event.target.id) {
                 if (element.id == event.target.id) {
-                    if (!element.completed) {
+                    if (!element.completed && event.target.innerText != 'clear') {
                         this.sendScore(event.target.id, "up", "Checked!")
+                    }
+                    else if (event.target.innerText == 'clear'){
+                        this.sendDeleteTask(event.target.id, "Deleted!")
                     } else {
                         this.sendScore(event.target.id, "down", "Un-Checked!")
                     }
@@ -177,30 +205,43 @@ class App extends React.Component<any, any> {
     }
 
 
+
     handleChangeHabits(event: any) {
-        const target_id = event.target.id.slice(4)
-        if (event.target.id.slice(0, 4) == "plus") {
-            this.state.tasks.habits.forEach((element: any) => {
-                if (element.id == target_id) {
-                    this.sendScore(target_id, "up", "Plus!")
-                }
-            })
-        }
-        else {
-            this.state.tasks.habits.forEach((element: any) => {
-                if (element.id == target_id) {
-                    this.sendScore(target_id, "down", "Minus :(")
-                }
-            })
+        if ( event.type == "click" ) {
+            if ( event.target.innerText == 'clear' ) {
+                this.sendDeleteTask(event.target.id, "Deleted!")
+            }
+        } else {
+            const target_id = event.target.id.slice(4)
+            if (event.target.id.slice(0, 4) == "plus") {
+                this.state.tasks.habits.forEach((element: any) => {
+                    if (element.id == target_id) {
+                        this.sendScore(target_id, "up", "Plus!")
+                    }
+                })
+            }
+            else {
+                this.state.tasks.habits.forEach((element: any) => {
+                    if (element.id == target_id) {
+                        this.sendScore(target_id, "down", "Minus :(")
+                    }
+                })
+            }
         }
     }
     handleChangeRewards(event: any) {
         const target_id = event.target.id
         this.state.tasks.rewards.forEach((element: any) => {
             if (element.id == event.target.id) {
-                if (element.id == target_id) {
-                    this.sendReward(target_id, "down", "Cost!")
-                }
+                if ( event.type == "click" ) {
+                    if ( event.target.innerText == 'clear' ) {
+                        this.sendDeleteTask(event.target.id, "Deleted!")
+                    }
+                } else {
+                    if (element.id == target_id) {
+                        this.sendReward(target_id, "down", "Cost!")
+                    }
+               }
             }
         })
     }

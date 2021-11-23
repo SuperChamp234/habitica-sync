@@ -228,6 +228,11 @@ ul li:not(.task-list-item)::before {
   font-weight: bold;
   text-shadow: 0 0 0.5em transparent;
 }
+
+.task-operation {
+  align-self: center;
+}
+
 button {
   margin: auto;
   margin-bottom: 5px;
