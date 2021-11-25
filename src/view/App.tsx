@@ -167,6 +167,11 @@ class App extends React.Component<any, any> {
         }
     }
 
+    async sendEditTask(id: string, type: string) {
+        console.log(id, type)
+        return (<div className="loading">Loading....</div>)
+    }
+
     handleChangeTodos(event: any) {
         if (event.target.id == "add-todo") {
             const title = event.target.name
@@ -200,11 +205,12 @@ class App extends React.Component<any, any> {
             this.state.tasks.dailys.forEach((element: any) => {
                 if (element.id == event.target.id) {
                     if (element.id == event.target.id) {
-                        if (!element.completed && event.target.innerText != 'clear') {
-                            this.sendScore(event.target.id, "up", "Checked!")
-                        }
-                        else if (event.target.innerText == 'clear') {
+                        if ( event.target.innerText == 'create' ) {
+                            this.sendEditTask(event.target.id, "daily")
+                        } else if (event.target.innerText == 'clear') {
                             this.sendDeleteTask(event.target.id, "Deleted!")
+                        } else if ( !element.completed) {
+                            this.sendScore(event.target.id, "up", "Checked!")
                         } else {
                             this.sendScore(event.target.id, "down", "Un-Checked!")
                         }
@@ -242,6 +248,7 @@ class App extends React.Component<any, any> {
     }
 
     handleChangeRewards(event: any) {
+        console.log(event)
         if (event.target.id == "add-reward") {
             const title = event.target.name
             this.sendAddTask("reward", title, "Add!")
@@ -251,8 +258,9 @@ class App extends React.Component<any, any> {
                 if (element.id == target_id) {
                     if (event.target.innerText == 'clear') {
                         this.sendDeleteTask(event.target.id, "Deleted!")
-                    }
-                    else {
+                    } else if (event.target.innerText == 'create') {
+                        this.sendEditTask(event.target.id, "Edit!")
+                    } else {
                         this.sendReward(target_id, "down", "Cost!")
                     }
                 }

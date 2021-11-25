@@ -1,5 +1,6 @@
 import * as React from "react";
 import DailyItem from "./DailyItem"
+import EditDailyItem from "./EditDailyItem"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { Trans } from 'react-i18next';
 
@@ -24,7 +25,6 @@ export default function Index(props: any) {
                 return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} daily_notes={daily.notes} onChange={props.onChange} completed={daily.completed} />
         })
         
-
         const display = <div id="classDisplay">
             <Tabs>
                 <TabList>
