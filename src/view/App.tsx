@@ -40,6 +40,7 @@ class App extends React.Component<any, any> {
             todos: [],
             dailys: [],
             habits: [],
+            input_task: "",
         }
         this.handleChangeTodos = this.handleChangeTodos.bind(this);
         this.handleChangeDailys = this.handleChangeDailys.bind(this);
@@ -59,7 +60,7 @@ class App extends React.Component<any, any> {
             );
         }
         else {
-            return null
+            return <div className="cron"></div>
         };
     }
     async runCron() {
@@ -132,7 +133,7 @@ class App extends React.Component<any, any> {
         }
     }
 
-    async sendDaily(type: string, title: string, message: string) {
+    async sendAddTask(type: string, title: string, message: string) {
         try {
             let response = await addTask(this.username, this.credentials, title, type);
             let result = await response.json();
@@ -163,87 +164,100 @@ class App extends React.Component<any, any> {
         } catch (e) {
             console.log(e);
             new Notice("API Error: Please check credentials")
-        }        
+        }
     }
 
     handleChangeTodos(event: any) {
-        this.state.tasks.todos.forEach((element: any) => {
-            if (element.id == event.target.id) {
-                if ( event.type == "click" ) {
-                    console.log(event)
-                    if ( event.target.innerText == 'clear' ) {
-                        this.sendDeleteTask(event.target.id, "Deleted!")
-                    }
-                } else {
-                    if (!element.completed) {
-                        this.sendScore(event.target.id, "up", "Checked!")
+        if (event.target.id == "add-todo") {
+            const title = event.target.name
+            this.sendAddTask("todo", title, "Add!")
+        } else {
+            this.state.tasks.todos.forEach((element: any) => {
+                if (element.id == event.target.id) {
+                    if (event.type == "click") {
+                        console.log(event)
+                        if (event.target.innerText == 'clear') {
+                            this.sendDeleteTask(event.target.id, "Deleted!")
+                        }
                     } else {
-                        this.sendScore(event.target.id, "down", "Un-Checked!")
+                        if (!element.completed) {
+                            this.sendScore(event.target.id, "up", "Checked!")
+                        } else {
+                            this.sendScore(event.target.id, "down", "Un-Checked!")
+                        }
                     }
                 }
-            }
-        })
-        
+            })
+        }
     }
 
 
     handleChangeDailys(event: any) {
-        this.state.tasks.dailys.forEach((element: any) => {
-            if (element.id == event.target.id) {
+        if (event.target.id == "add-daily") {
+            const title = event.target.name
+            this.sendAddTask("daily", title, "Add!")
+        } else {
+            this.state.tasks.dailys.forEach((element: any) => {
                 if (element.id == event.target.id) {
-                    if (!element.completed && event.target.innerText != 'clear') {
-                        this.sendScore(event.target.id, "up", "Checked!")
-                    }
-                    else if (event.target.innerText == 'clear'){
-                        this.sendDeleteTask(event.target.id, "Deleted!")
-                    } else {
-                        this.sendScore(event.target.id, "down", "Un-Checked!")
+                    if (element.id == event.target.id) {
+                        if (!element.completed && event.target.innerText != 'clear') {
+                            this.sendScore(event.target.id, "up", "Checked!")
+                        }
+                        else if (event.target.innerText == 'clear') {
+                            this.sendDeleteTask(event.target.id, "Deleted!")
+                        } else {
+                            this.sendScore(event.target.id, "down", "Un-Checked!")
+                        }
                     }
                 }
-            }
-        })
+            })
+        }
     }
 
-
-
     handleChangeHabits(event: any) {
-        if ( event.type == "click" ) {
-            if ( event.target.innerText == 'clear' ) {
-                this.sendDeleteTask(event.target.id, "Deleted!")
-            }
+        if (event.target.id == "add-habit") {
+            const title = event.target.name
+            this.sendAddTask("habit", title, "Add!")
         } else {
-            const target_id = event.target.id.slice(4)
-            if (event.target.id.slice(0, 4) == "plus") {
-                this.state.tasks.habits.forEach((element: any) => {
-                    if (element.id == target_id) {
-                        this.sendScore(target_id, "up", "Plus!")
-                    }
-                })
-            }
-            else {
-                this.state.tasks.habits.forEach((element: any) => {
-                    if (element.id == target_id) {
-                        this.sendScore(target_id, "down", "Minus :(")
-                    }
-                })
+            if (event.target.innerText == 'clear') {
+                this.sendDeleteTask(event.target.id, "Deleted!")
+            } else {
+                const target_id = event.target.id.slice(4)
+                if (event.target.id.slice(0, 4) == "plus") {
+                    this.state.tasks.habits.forEach((element: any) => {
+                        if (element.id == target_id) {
+                            this.sendScore(target_id, "up", "Plus!")
+                        }
+                    })
+                }
+                else {
+                    this.state.tasks.habits.forEach((element: any) => {
+                        if (element.id == target_id) {
+                            this.sendScore(target_id, "down", "Minus :(")
+                        }
+                    })
+                }
             }
         }
     }
+
     handleChangeRewards(event: any) {
-        const target_id = event.target.id
-        this.state.tasks.rewards.forEach((element: any) => {
-            if (element.id == event.target.id) {
-                if ( event.type == "click" ) {
-                    if ( event.target.innerText == 'clear' ) {
+        if (event.target.id == "add-reward") {
+            const title = event.target.name
+            this.sendAddTask("reward", title, "Add!")
+        } else {
+            const target_id = event.target.id
+            this.state.tasks.rewards.forEach((element: any) => {
+                if (element.id == target_id) {
+                    if (event.target.innerText == 'clear') {
                         this.sendDeleteTask(event.target.id, "Deleted!")
                     }
-                } else {
-                    if (element.id == target_id) {
+                    else {
                         this.sendReward(target_id, "down", "Cost!")
                     }
-               }
-            }
-        })
+                }
+            })
+        }
     }
     render() {
         let content = this.CheckCron(this.state.user_data.lastCron);
@@ -256,7 +270,6 @@ class App extends React.Component<any, any> {
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards} />
                 {content}
-                <div></div>
                 <Statsview user_data={this.state.user_data} />
             </div>
             );

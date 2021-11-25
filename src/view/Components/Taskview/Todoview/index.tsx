@@ -1,12 +1,16 @@
 import * as React from "react";
 import TodoItem from "./TodoItem"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { useTranslation, Trans, Translation } from 'react-i18next'
-import AddTask from "../AddTask";
+import { Trans } from 'react-i18next'
 
 export default function Index(props: any){
+    const [title, setTitle] = React.useState('')
     if(props.todos == undefined) {
-        return <div id="classDisplay">No Todos present.</div>
+        return <div id="classDisplay">
+            <input type="text" placeholder="添加待办事项" onChange={event => setTitle(event.target.value)} />
+            <button className="submit-button" id="add-todo" onClick={props.onChange} name={title}><Trans>submit</Trans></button>
+            No Todos present.
+            </div>
     }
     else {
         const incompleteTodos = props.todos.map((todo: any) => {
@@ -23,8 +27,9 @@ export default function Index(props: any){
                                 <Tab><Trans>Active</Trans></Tab>
                                 <Tab><Trans>Completed</Trans></Tab>
                             </TabList>
-                            <AddTask type="todo"></AddTask>
                             <TabPanel>
+                                <input type="text" placeholder="添加待办事项" onChange={event => setTitle(event.target.value)} />
+                                <button className="submit-button" id="add-todo" onClick={props.onChange} name={title}><Trans>submit</Trans></button>
                                 <ul>{incompleteTodos}</ul>
                             </TabPanel>
                             <TabPanel>

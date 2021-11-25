@@ -11,6 +11,7 @@ function DailyItem(props: any) {
                     <p><Emoji text={props.daily_text}></Emoji></p>
                     <ReactMarkdown children={props.daily_notes} />
                 </div>
+                
                 <button className="task-operation" >
                     <span className="material-icons md-24" id={props.id} onClick={props.onChange}>create</span>
                 </button>

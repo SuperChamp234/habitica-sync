@@ -57,7 +57,7 @@ export async function costReward(username: string, credentials: string, taskID: 
 
 
 export async function addTask(username: string, credentials: string, title: string, type: string) {
-    const url = "https://habitica.com/api/v4/tasks/user".concat(title)
+    const url = "https://habitica.com/api/v4/tasks/user"
     const response = fetch(url, {
         method: 'POST',
         headers: {
