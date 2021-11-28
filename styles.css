@@ -212,7 +212,12 @@ ul {
   display: none;
   left: 0px;
   height: 88%;
+  /* overflow: scroll; */
+}
+
+.task-panel {
   overflow: scroll;
+  height: 100%;
 }
 
 .react-tabs__tab-panel--selected {
