@@ -4,7 +4,6 @@ import { getStats, scoreTask, makeCronReq, costReward, addTask, deleteTask, upda
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
 import "../i18n"
-import { exit } from "process";
 
 class App extends React.Component<any, any> {
     private _username = "";
@@ -167,7 +166,7 @@ class App extends React.Component<any, any> {
         }
     }
 
-    async sendUpdateTask(id: string, type: string,message: string, title: string, notes: string) {
+    async sendUpdateTask(id: string, type: string, message: string, title: string, notes: string) {
         try {
             let response = await updateTask(this.username, this.credentials, id, type, title, notes);
             let result = await response.json();
@@ -218,13 +217,13 @@ class App extends React.Component<any, any> {
             this.state.tasks.dailys.forEach((element: any) => {
                 if (element.id == event.target.id) {
                     if (element.id == event.target.id) {
-                        if ( event.target.attributes.title.value == 'submit' ) {
-                            const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value:element.text
-                            const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value:element.notes
-                            this.sendUpdateTask(event.target.id,'daily',"Update!",task_title,task_notes)
+                        if (event.target.attributes.title.value == 'submit') {
+                            const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
+                            const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
+                            this.sendUpdateTask(event.target.id, 'daily', "Update!", task_title, task_notes)
                         } else if (event.target.attributes.title.value == 'delete') {
                             this.sendDeleteTask(event.target.id, "Deleted!")
-                        } else if ( !element.completed) {
+                        } else if (!element.completed) {
                             this.sendScore(event.target.id, "up", "Checked!")
                         } else {
                             this.sendScore(event.target.id, "down", "Un-Checked!")
@@ -274,7 +273,7 @@ class App extends React.Component<any, any> {
                     if (event.target.innerText == 'clear') {
                         this.sendDeleteTask(event.target.id, "Deleted!")
                     } else if (event.target.innerText == 'create') {
-                        this.sendUpdateTask(event.target.id,'reward',"Edit!","1","1")
+                        this.sendUpdateTask(event.target.id, 'reward', "Edit!", "1", "1")
                     } else {
                         this.sendReward(target_id, "down", "Cost!")
                     }

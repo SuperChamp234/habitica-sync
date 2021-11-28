@@ -11,5 +11,11 @@
     "submit": "添加",
     "No Dailies Present": "目前每日任务为空",
     "No habits present.": "目前习惯为空",
-    "No Rewards present.": "目前奖励为空"
+    "No Rewards present.": "目前奖励为空",
+    "There was an error running the cron. Please try again later.": "运行定时失败出错，请稍后再试。",
+    "Login Failed, Please check credentials and try again!": "登录失败, 请检查凭据后再次尝试",
+    "API Error: Please check credentials": "API错误，请检查凭据",
+    "Resyncing, please try again": "重新同步失败，请稍后再试",
+    "Add!": "已添加",
+    "Loading....": "加载中...."
 }

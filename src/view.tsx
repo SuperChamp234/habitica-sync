@@ -1,4 +1,4 @@
-import { ItemView,WorkspaceLeaf } from "obsidian";
+import { ItemView, WorkspaceLeaf } from "obsidian";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import App from "./view/App"
@@ -27,11 +27,11 @@ export class HabiticaSyncView extends ItemView {
 
     async onOpen() {
         ReactDOM.render(
-            <App plugin={this.plugin}/>,
-           this.containerEl.children[1]
+            <App plugin={this.plugin} />,
+            this.containerEl.children[1]
         )
     }
-    async onClose(){      
+    async onClose() {
         ReactDOM.unmountComponentAtNode(this.containerEl.children[1]);
     }
 }
