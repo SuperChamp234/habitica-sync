@@ -17,5 +17,17 @@
     "API Error: Please check credentials": "API错误，请检查凭据",
     "Resyncing, please try again": "重新同步失败，请稍后再试",
     "Add!": "已添加",
-    "Loading....": "加载中...."
+    "Loading....": "加载中....",
+    "Deleted!": "已删除!",
+    "Edit!": "已修改!",
+    "running cron": "正在运行定时任务",
+    "Checked!": "已完成",
+    "Un-Checked!": "取消完成状态",
+    "Plus!": "+1",
+    "Minus :(": "-1",
+    "Cost!": "消费成功",
+    "Add Daily Task": "添加每日任务",
+    "Add Todo": "添加待办事项",
+    "Add Habit": "添加习惯",
+    "Add Reward": "添加奖励"
 }

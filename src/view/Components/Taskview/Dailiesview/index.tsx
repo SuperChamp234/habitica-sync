@@ -1,14 +1,14 @@
 import * as React from "react";
 import DailyItem from "./DailyItem"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { Trans } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 export default function Index(props: any) {
     const [title, setTitle] = React.useState('')
-
+    let { t ,i18n} = useTranslation()
     if (props.dailys == undefined) {
         return <div id="classDisplay">
-            <input type="text" placeholder="添加每日任务" onChange={event => setTitle(event.target.value)} />
+            <input type="text" placeholder={t('Add Daily Task')} onChange={event => setTitle(event.target.value)} />
             <button className="submit-button" id="add-daily" onClick={props.onChange} name={title}><Trans>submit</Trans></button>
             <Trans>No Dailies Present</Trans>
         </div>
@@ -32,7 +32,7 @@ export default function Index(props: any) {
                     <Tab><Trans>Completed</Trans></Tab>
                 </TabList>
                 <TabPanel>
-                    <input type="text" id="task-input-box" placeholder="添加每日任务" onChange={event => setTitle(event.target.value)} value={title} />
+                    <input type="text" id="task-input-box" placeholder={t('Add Daily Task')} onChange={event => setTitle(event.target.value)} value={title} />
                     <button className="submit-button" id="add-daily" onClick={function (e) { setTitle(""); props.onChange(e) }} name={title}><Trans>submit</Trans></button>
                     <div className="task-panel">
                         <ul>{incompleteDailies}</ul>

@@ -1,13 +1,14 @@
 import * as React from "react";
 import TodoItem from "./TodoItem"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { Trans } from 'react-i18next'
+import { Trans,useTranslation } from 'react-i18next'
 
 export default function Index(props: any){
     const [title, setTitle] = React.useState('')
+    let { t ,i18n} = useTranslation()
     if(props.todos == undefined) {
         return <div id="classDisplay">
-            <input type="text" placeholder="添加待办事项" onChange={event => setTitle(event.target.value)} />
+            <input type="text" placeholder={t('Add Todo')} onChange={event => setTitle(event.target.value)} />
             <button className="submit-button" id="add-todo" onClick={props.onChange} name={title}><Trans>submit</Trans></button>
             No Todos present.
             </div>
@@ -28,7 +29,7 @@ export default function Index(props: any){
                                 <Tab><Trans>Completed</Trans></Tab>
                             </TabList>
                             <TabPanel>
-                                <input type="text" placeholder="添加待办事项" onChange={event => setTitle(event.target.value)} />
+                                <input type="text" placeholder={t('Add Todo')} onChange={event => setTitle(event.target.value)} />
                                 <button className="submit-button" id="add-todo" onClick={props.onChange} name={title}><Trans>submit</Trans></button>
                                 <ul>{incompleteTodos}</ul>
                             </TabPanel>

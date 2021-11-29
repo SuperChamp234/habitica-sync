@@ -3,7 +3,9 @@ import { Notice } from "obsidian";
 import { getStats, scoreTask, makeCronReq, costReward, addTask, deleteTask, updateTask } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
-import "../i18n"
+import { Trans } from 'react-i18next';
+import "src/i18n"
+import i18next from "i18next";
 
 class App extends React.Component<any, any> {
     private _username = "";
@@ -63,7 +65,7 @@ class App extends React.Component<any, any> {
         };
     }
     async runCron() {
-        console.log("running cron");
+        console.log(i18next.t('running cron'));
         try {
             let response = await makeCronReq(this.username, this.credentials);
             this.setState({
@@ -71,7 +73,7 @@ class App extends React.Component<any, any> {
             })
         } catch (error) {
             console.log(error);
-            new Notice("There was an error running the cron. Please try again later.");
+            new Notice(i18next.t("There was an error running the cron. Please try again later."));
         }
         this.reloadData();
     }
@@ -80,7 +82,7 @@ class App extends React.Component<any, any> {
             let response = await getStats(this.username, this.credentials);
             let result = await response.json();
             if (result.success === false) {
-                new Notice('Login Failed, Please check credentials and try again!');
+                new Notice(i18next.t('Login Failed, Please check credentials and try again!'));
             }
             else {
                 this.setState({
@@ -91,7 +93,7 @@ class App extends React.Component<any, any> {
             }
         } catch (e) {
             console.log(e);
-            new Notice("API Error: Please check credentials")
+            new Notice(i18next.t('API Error: Please check credentials'))
         }
     }
     componentDidMount() {
@@ -106,12 +108,12 @@ class App extends React.Component<any, any> {
                 new Notice(message);
                 this.reloadData();
             } else {
-                new Notice("Resyncing, please try again");
+                new Notice(i18next.t('Resyncing, please try again'));
                 this.reloadData();
             }
         } catch (e) {
             console.log(e);
-            new Notice("API Error: Please check credentials")
+            new Notice(i18next.t('API Error: Please check credentials'))
         }
     }
 
@@ -123,12 +125,12 @@ class App extends React.Component<any, any> {
                 new Notice(message);
                 this.reloadData();
             } else {
-                new Notice("Resyncing, please try again");
+                new Notice(i18next.t('Resyncing, please try again'));
                 this.reloadData();
             }
         } catch (e) {
             console.log(e);
-            new Notice("API Error: Please check credentials")
+            new Notice(i18next.t('API Error: Please check credentials'))
         }
     }
 
@@ -140,12 +142,12 @@ class App extends React.Component<any, any> {
                 new Notice(message);
                 this.reloadData();
             } else {
-                new Notice("Resyncing, please try again");
+                new Notice(i18next.t('Resyncing, please try again'));
                 this.reloadData();
             }
         } catch (e) {
             console.log(e);
-            new Notice("API Error: Please check credentials")
+            new Notice(i18next.t('API Error: Please check credentials'))
         }
     }
 
@@ -157,12 +159,12 @@ class App extends React.Component<any, any> {
                 new Notice(message);
                 this.reloadData();
             } else {
-                new Notice("Resyncing, please try again");
+                new Notice(i18next.t('Resyncing, please try again'));
                 this.reloadData();
             }
         } catch (e) {
             console.log(e);
-            new Notice("API Error: Please check credentials")
+            new Notice(i18next.t('API Error: Please check credentials'))
         }
     }
 
@@ -174,12 +176,12 @@ class App extends React.Component<any, any> {
                 new Notice(message);
                 this.reloadData();
             } else {
-                new Notice("Resyncing, please try again");
+                new Notice(i18next.t('Resyncing, please try again'));
                 this.reloadData();
             }
         } catch (e) {
             console.log(e);
-            new Notice("API Error: Please check credentials")
+            new Notice(i18next.t('API Error: Please check credentials'))
         }
         // console.log(id, type,title,notes)
     }
@@ -187,20 +189,20 @@ class App extends React.Component<any, any> {
     handleChangeTodos(event: any) {
         if (event.target.id == "add-todo") {
             const title = event.target.name
-            this.sendAddTask("todo", title, "Add!")
+            this.sendAddTask("todo", title, i18next.t('Add!'))
         } else {
             this.state.tasks.todos.forEach((element: any) => {
                 if (element.id == event.target.id) {
                     if (event.type == "click") {
                         console.log(event)
                         if (event.target.innerText == 'clear') {
-                            this.sendDeleteTask(event.target.id, "Deleted!")
+                            this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
                         }
                     } else {
                         if (!element.completed) {
-                            this.sendScore(event.target.id, "up", "Checked!")
+                            this.sendScore(event.target.id, "up", i18next.t('Checked!'))
                         } else {
-                            this.sendScore(event.target.id, "down", "Un-Checked!")
+                            this.sendScore(event.target.id, "down", i18next.t('Un-Checked!'))
                         }
                     }
                 }
@@ -212,7 +214,7 @@ class App extends React.Component<any, any> {
     handleChangeDailys(event: any) {
         if (event.target.id == "add-daily") {
             const title = event.target.name
-            this.sendAddTask("daily", title, "Add!")
+            this.sendAddTask("daily", title, i18next.t('Add!'))
         } else {
             this.state.tasks.dailys.forEach((element: any) => {
                 if (element.id == event.target.id) {
@@ -222,11 +224,11 @@ class App extends React.Component<any, any> {
                             const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
                             this.sendUpdateTask(event.target.id, 'daily', "Update!", task_title, task_notes)
                         } else if (event.target.attributes.title.value == 'delete') {
-                            this.sendDeleteTask(event.target.id, "Deleted!")
+                            this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
                         } else if (!element.completed) {
-                            this.sendScore(event.target.id, "up", "Checked!")
+                            this.sendScore(event.target.id, "up", i18next.t('Checked!'))
                         } else {
-                            this.sendScore(event.target.id, "down", "Un-Checked!")
+                            this.sendScore(event.target.id, "down", i18next.t('Un-Checked!'))
                         }
                     }
                 }
@@ -237,23 +239,23 @@ class App extends React.Component<any, any> {
     handleChangeHabits(event: any) {
         if (event.target.id == "add-habit") {
             const title = event.target.name
-            this.sendAddTask("habit", title, "Add!")
+            this.sendAddTask("habit", title, i18next.t('Add!'))
         } else {
             if (event.target.innerText == 'clear') {
-                this.sendDeleteTask(event.target.id, "Deleted!")
+                this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
             } else {
                 const target_id = event.target.id.slice(4)
                 if (event.target.id.slice(0, 4) == "plus") {
                     this.state.tasks.habits.forEach((element: any) => {
                         if (element.id == target_id) {
-                            this.sendScore(target_id, "up", "Plus!")
+                            this.sendScore(target_id, "up", i18next.t('Plus!'))
                         }
                     })
                 }
                 else {
                     this.state.tasks.habits.forEach((element: any) => {
                         if (element.id == target_id) {
-                            this.sendScore(target_id, "down", "Minus :(")
+                            this.sendScore(target_id, "down", i18next.t("Minus :("))
                         }
                     })
                 }
@@ -265,17 +267,17 @@ class App extends React.Component<any, any> {
         console.log(event)
         if (event.target.id == "add-reward") {
             const title = event.target.name
-            this.sendAddTask("reward", title, "Add!")
+            this.sendAddTask("reward", title, i18next.t('Add!'))
         } else {
             const target_id = event.target.id
             this.state.tasks.rewards.forEach((element: any) => {
                 if (element.id == target_id) {
                     if (event.target.innerText == 'clear') {
-                        this.sendDeleteTask(event.target.id, "Deleted!")
+                        this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
                     } else if (event.target.innerText == 'create') {
-                        this.sendUpdateTask(event.target.id, 'reward', "Edit!", "1", "1")
+                        this.sendUpdateTask(event.target.id, 'reward', i18next.t('Edit!'), "1", "1")
                     } else {
-                        this.sendReward(target_id, "down", "Cost!")
+                        this.sendReward(target_id, "down", i18next.t('Cost!'))
                     }
                 }
             })
@@ -284,9 +286,9 @@ class App extends React.Component<any, any> {
     render() {
         let content = this.CheckCron(this.state.user_data.lastCron);
         if (this.state.error)
-            return (<div className="loading">Loading....</div>)
+            return (<div className="loading"><Trans>Loading....</Trans></div>)
         else if (!this.state.isLoaded)
-            return <div className="loading">Loading....</div>
+            return <div className="loading"><Trans>Loading....</Trans></div>
         else {
             return (<div className="plugin-root">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
