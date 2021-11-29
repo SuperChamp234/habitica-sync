@@ -111,10 +111,12 @@ input[type=checkbox] {
 }
 
 .submit-button {
-    padding: 5px 15px;
+    /* padding: 5px 5px; */
     font-size: 15px;
     border: 1px solid #aaa;
-    white-space: nowrap;
+    /* white-space: nowrap; */
+    /* margin: 10px; */
+    margin: 0;
 }
 
 input[type=checkbox]:focus {
@@ -236,6 +238,34 @@ ul li:not(.task-list-item)::before {
 
 .task-operation {
   align-self: center;
+  margin: 0;
+  padding: 0;
+}
+
+.edit-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.edit-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.task-submit {
+  display: grid;
+  grid-template-columns: 10fr 5fr;
+}
+
+.add-task-input {
+  display: block;
+  width: 100%;
+}
+
+.task-input-box {
+  margin-right: 10px;
 }
 
 button {

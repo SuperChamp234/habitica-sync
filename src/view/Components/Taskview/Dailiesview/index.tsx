@@ -5,11 +5,13 @@ import { Trans, useTranslation } from 'react-i18next';
 
 export default function Index(props: any) {
     const [title, setTitle] = React.useState('')
-    let { t ,i18n} = useTranslation()
+    let { t, i18n } = useTranslation()
     if (props.dailys == undefined) {
         return <div id="classDisplay">
-            <input type="text" placeholder={t('Add Daily Task')} onChange={event => setTitle(event.target.value)} />
-            <button className="submit-button" id="add-daily" onClick={props.onChange} name={title}><Trans>submit</Trans></button>
+            <div className="task-submit">
+                <input className="task-input-box" type="text" placeholder={t('Add Daily Task')} onChange={event => setTitle(event.target.value)} value={title} />
+                <button className="submit-button" id="add-daily" onClick={function (e) { setTitle(""); props.onChange(e) }} name={title}><Trans>submit</Trans></button>
+            </div>
             <Trans>No Dailies Present</Trans>
         </div>
     }
@@ -17,7 +19,7 @@ export default function Index(props: any) {
         const incompleteDailies = props.dailys.map((daily: any) => {
             if (!daily.completed)
                 return (
-                    <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} daily_notes={daily.notes} onChange={props.onChange} completed={daily.completed} status="view" />
+                    <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} daily_notes={daily.notes} onChange={props.onChange} completed={daily.completed} />
                 )
         })
         const completedDailies = props.dailys.map((daily: any) => {
@@ -32,12 +34,13 @@ export default function Index(props: any) {
                     <Tab><Trans>Completed</Trans></Tab>
                 </TabList>
                 <TabPanel>
-                    <input type="text" id="task-input-box" placeholder={t('Add Daily Task')} onChange={event => setTitle(event.target.value)} value={title} />
-                    <button className="submit-button" id="add-daily" onClick={function (e) { setTitle(""); props.onChange(e) }} name={title}><Trans>submit</Trans></button>
+                    <div className="task-submit">
+                        <input className="task-input-box" type="text" placeholder={t('Add Daily Task')} onChange={event => setTitle(event.target.value)} value={title} />
+                        <button className="submit-button" id="add-daily" onClick={function (e) { setTitle(""); props.onChange(e) }} name={title}><Trans>submit</Trans></button>
+                    </div>
                     <div className="task-panel">
                         <ul>{incompleteDailies}</ul>
                     </div>
-
                 </TabPanel>
                 <TabPanel>
                     <ul>{completedDailies}</ul>

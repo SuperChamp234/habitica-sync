@@ -168,9 +168,9 @@ class App extends React.Component<any, any> {
         }
     }
 
-    async sendUpdateTask(id: string, type: string, message: string, title: string, notes: string) {
+    async sendUpdateTask(id: string, type: string, message: string, title: string, notes: string, coin: string = null) {
         try {
-            let response = await updateTask(this.username, this.credentials, id, type, title, notes);
+            let response = await updateTask(this.username, this.credentials, id, type, title, notes, coin);
             let result = await response.json();
             if (result.success === true) {
                 new Notice(message);
@@ -183,7 +183,6 @@ class App extends React.Component<any, any> {
             console.log(e);
             new Notice(i18next.t('API Error: Please check credentials'))
         }
-        // console.log(id, type,title,notes)
     }
 
     handleChangeTodos(event: any) {
@@ -194,9 +193,12 @@ class App extends React.Component<any, any> {
             this.state.tasks.todos.forEach((element: any) => {
                 if (element.id == event.target.id) {
                     if (event.type == "click") {
-                        console.log(event)
                         if (event.target.innerText == 'clear') {
                             this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
+                        } else if (event.target.attributes.title.value == 'submit') {
+                            const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
+                            const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
+                            this.sendUpdateTask(event.target.id, 'todo', i18next.t("Update!"), task_title, task_notes)
                         }
                     } else {
                         if (!element.completed) {
@@ -218,17 +220,19 @@ class App extends React.Component<any, any> {
         } else {
             this.state.tasks.dailys.forEach((element: any) => {
                 if (element.id == event.target.id) {
-                    if (element.id == event.target.id) {
-                        if (event.target.attributes.title.value == 'submit') {
-                            const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
-                            const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
-                            this.sendUpdateTask(event.target.id, 'daily', "Update!", task_title, task_notes)
-                        } else if (event.target.attributes.title.value == 'delete') {
-                            this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
-                        } else if (!element.completed) {
+                    if (event.target.type == 'checkbox') {
+                        if (!element.completed) {
                             this.sendScore(event.target.id, "up", i18next.t('Checked!'))
                         } else {
                             this.sendScore(event.target.id, "down", i18next.t('Un-Checked!'))
+                        }
+                    } else {
+                        if (event.target.attributes.title.value == 'submit') {
+                            const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
+                            const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
+                            this.sendUpdateTask(event.target.id, 'daily', i18next.t("Update!"), task_title, task_notes)
+                        } else if (event.target.attributes.title.value == 'delete') {
+                            this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
                         }
                     }
                 }
@@ -240,26 +244,23 @@ class App extends React.Component<any, any> {
         if (event.target.id == "add-habit") {
             const title = event.target.name
             this.sendAddTask("habit", title, i18next.t('Add!'))
+        } else if (event.target.innerText == 'clear') {
+            this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
         } else {
-            if (event.target.innerText == 'clear') {
-                this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
-            } else {
-                const target_id = event.target.id.slice(4)
-                if (event.target.id.slice(0, 4) == "plus") {
-                    this.state.tasks.habits.forEach((element: any) => {
-                        if (element.id == target_id) {
-                            this.sendScore(target_id, "up", i18next.t('Plus!'))
-                        }
-                    })
+            this.state.tasks.habits.forEach((element: any) => {
+                if (event.target.attributes.title.value == 'submit') {
+                    const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
+                    const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
+                    this.sendUpdateTask(event.target.id, 'daily', i18next.t("Update!"), task_title, task_notes)
+                } else {
+                    const target_id = event.target.id.slice(4)
+                    if (event.target.id.slice(0, 4) == "plus") {
+                        this.sendScore(target_id, "up", i18next.t('Plus!'))
+                    } else {
+                        this.sendScore(target_id, "down", i18next.t("Minus :("))
+                    }
                 }
-                else {
-                    this.state.tasks.habits.forEach((element: any) => {
-                        if (element.id == target_id) {
-                            this.sendScore(target_id, "down", i18next.t("Minus :("))
-                        }
-                    })
-                }
-            }
+            })
         }
     }
 
@@ -274,8 +275,11 @@ class App extends React.Component<any, any> {
                 if (element.id == target_id) {
                     if (event.target.innerText == 'clear') {
                         this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
-                    } else if (event.target.innerText == 'create') {
-                        this.sendUpdateTask(event.target.id, 'reward', i18next.t('Edit!'), "1", "1")
+                    } else if (event.target.attributes.title.value == 'submit') {
+                        const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
+                        const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
+                        const task_coin = event.target.attributes['data-coin'].value ? event.target.attributes['data-coin'].value : element.reward_value
+                        this.sendUpdateTask(event.target.id, 'reward', i18next.t('Edit!'), task_title, task_notes, task_coin)
                     } else {
                         this.sendReward(target_id, "down", i18next.t('Cost!'))
                     }
