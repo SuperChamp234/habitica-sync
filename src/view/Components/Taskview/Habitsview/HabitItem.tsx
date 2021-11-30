@@ -9,10 +9,10 @@ function HabitItem(props: any) {
     if (state == 'view') {
         return (
             <div className="habit-item" id={props.id}>
-                <button className="habit-plus" id={"plus" + props.id} onClick={props.onChange}>
+                <button className="habit-plus" id={props.id} onClick={props.onChange} title="plus">
                     +{props.upCount}
                 </button>
-                <button className="habit-minus" id={"mins" + props.id} onClick={props.onChange}>
+                <button className="habit-minus" id={props.id} onClick={props.onChange} title="mins">
                     -{props.downCount}
                 </button>
                 <div>

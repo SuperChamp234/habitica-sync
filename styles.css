@@ -130,12 +130,16 @@ input[type=checkbox]:focus {
 .plugin-root {
   min-width: 260px;
   display: grid;
-  grid-template-rows: 97% 1% 0.5%;
+  grid-template-rows: 94% 4% 1% 1%;
   height: inherit;
 }
 
 #classDisplay {
   height: 100%;
+}
+
+.view-content {
+  margin-bottom: 0;
 }
 
 .substats {

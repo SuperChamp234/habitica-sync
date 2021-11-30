@@ -95,7 +95,7 @@ export async function updateTask(username: string, credentials: string, id: stri
             "x-api-user": username,
             "x-api-key": credentials,
         },
-        body: type === 'reward' ? JSON.stringify({id: id,type: type, text: title,notes: notes, coin: coin}):JSON.stringify({id: id,type: type, text: title,notes: notes})
+        body: type === 'reward' ? JSON.stringify({id: id,type: type, text: title,notes: notes, value: coin}):JSON.stringify({id: id,type: type, text: title,notes: notes})
     })
     return(response)
 }

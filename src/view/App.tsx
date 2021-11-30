@@ -56,7 +56,7 @@ class App extends React.Component<any, any> {
         if (cronDate.getDate() != now.getDate() || (cronDate.getMonth() != now.getMonth() || cronDate.getFullYear() != now.getFullYear())) {
             return (
                 <div className="cron">
-                    <button onClick={this.runCron}>Refresh</button>
+                    <button onClick={this.runCron}><Trans>Click me to refresh</Trans></button>
                 </div>
             );
         }
@@ -248,17 +248,17 @@ class App extends React.Component<any, any> {
             this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
         } else {
             this.state.tasks.habits.forEach((element: any) => {
-                if (event.target.attributes.title.value == 'submit') {
-                    const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
-                    const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
-                    this.sendUpdateTask(event.target.id, 'daily', i18next.t("Update!"), task_title, task_notes)
-                } else {
-                    const target_id = event.target.id.slice(4)
-                    if (event.target.id.slice(0, 4) == "plus") {
-                        this.sendScore(target_id, "up", i18next.t('Plus!'))
-                    } else {
-                        this.sendScore(target_id, "down", i18next.t("Minus :("))
+                if (element.id == event.target.id) {
+                    if (event.target.attributes.title && event.target.attributes.title.value == 'submit') {
+                        const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
+                        const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
+                        this.sendUpdateTask(event.target.id, 'daily', i18next.t("Update!"), task_title, task_notes)
+                    } else if (event.target.attributes.title && event.target.attributes.title.value == 'plus') {
+                        this.sendScore(event.target.id, "up", i18next.t('Plus!'))
+                    } else if (event.target.attributes.title && event.target.attributes.title.value == 'mins') {
+                        this.sendScore(event.target.id, "down", i18next.t("Minus :("))
                     }
+
                 }
             })
         }
@@ -278,7 +278,7 @@ class App extends React.Component<any, any> {
                     } else if (event.target.attributes.title.value == 'submit') {
                         const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
                         const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
-                        const task_coin = event.target.attributes['data-coin'].value ? event.target.attributes['data-coin'].value : element.reward_value
+                        const task_coin = event.target.attributes['data-coin'].value ? event.target.attributes['data-coin'].value : element.value
                         this.sendUpdateTask(event.target.id, 'reward', i18next.t('Edit!'), task_title, task_notes, task_coin)
                     } else {
                         this.sendReward(target_id, "down", i18next.t('Cost!'))

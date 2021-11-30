@@ -5,7 +5,7 @@ function RewardItem(props: any) {
     const [state, setState] = React.useState('view')
     const [title, setTitle] = React.useState('')
     const [notes, setNotes] = React.useState('')
-    const [coin, setCoin] = React.useState(0)
+    const [coin, setCoin] = React.useState('0')
     if (state === 'view') {
         return (
             <div className="reward-item" id={props.id}>
@@ -27,7 +27,7 @@ function RewardItem(props: any) {
             <div className="edit-reward-item edit-item">
                 <input type="text" onChange={event => setTitle(event.target.value)} defaultValue={props.reward_text}></input>
                 <input type="text" onChange={event => setNotes(event.target.value)} defaultValue={props.reward_notes}></input>
-                <input type="text" onChange={event => setNotes(event.target.value)} defaultValue={props.reward_value}></input>
+                <input type="text" onChange={event => setCoin(event.target.value)} defaultValue={props.reward_value}></input>
                 <div className="edit-reward-button edit-button">
                     <button className="task-operation"  ><span className="material-icons md-24" id={props.id} onClick={function (e) { props.onChange(e); setState('view') }} title="submit" data-title={title} data-notes={notes} data-coin={coin}>check</span></button>
                     <button className="task-operation"><span className="material-icons md-24" id={props.id} onClick={() => setState('view')} title="cancel">clear</span></button>
