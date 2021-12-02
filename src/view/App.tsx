@@ -273,13 +273,13 @@ class App extends React.Component<any, any> {
             const target_id = event.target.id
             this.state.tasks.rewards.forEach((element: any) => {
                 if (element.id == target_id) {
-                    if (event.target.innerText == 'clear') {
-                        this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
-                    } else if (event.target.attributes.title.value == 'submit') {
+                    if (event.target.attributes.title && event.target.attributes.title.value == 'submit') {
                         const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
                         const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
                         const task_coin = event.target.attributes['data-coin'].value ? event.target.attributes['data-coin'].value : element.value
                         this.sendUpdateTask(event.target.id, 'reward', i18next.t('Edit!'), task_title, task_notes, task_coin)
+                    } else if (event.target.innerText == 'clear') {
+                        this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
                     } else {
                         this.sendReward(target_id, "down", i18next.t('Cost!'))
                     }
