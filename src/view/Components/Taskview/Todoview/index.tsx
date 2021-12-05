@@ -35,10 +35,18 @@ export default function Index(props: any) {
                         <input className="task-input-box" type="text" placeholder={t('Add Todo')} onChange={event => setTitle(event.target.value)} value={title} />
                         <button className="submit-button" id="add-todo" onClick={function (e) { setTitle(""); props.onChange(e) }} name={title}><Trans>submit</Trans></button>
                     </div>
-                    <ul>{incompleteTodos}</ul>
+                    <div className="task-panel">
+                        <ul>{incompleteTodos}</ul>
+                    </div>
                 </TabPanel>
                 <TabPanel>
-                    <ul>{completedTodos}</ul>
+                    <div className="task-submit">
+                        <input className="task-input-box" type="text" placeholder={t('Add Todo')} onChange={event => setTitle(event.target.value)} value={title} />
+                        <button className="submit-button" id="add-todo" onClick={function (e) { setTitle(""); props.onChange(e) }} name={title}><Trans>submit</Trans></button>
+                    </div>
+                    <div className="task-panel">
+                        <ul>{completedTodos}</ul>
+                    </div>
                 </TabPanel>
             </Tabs>
         </div>

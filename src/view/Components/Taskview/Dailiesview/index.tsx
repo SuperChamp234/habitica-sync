@@ -43,7 +43,13 @@ export default function Index(props: any) {
                     </div>
                 </TabPanel>
                 <TabPanel>
-                    <ul>{completedDailies}</ul>
+                    <div className="task-submit">
+                        <input className="task-input-box" type="text" placeholder={t('Add Daily Task')} onChange={event => setTitle(event.target.value)} value={title} />
+                        <button className="submit-button" id="add-daily" onClick={function (e) { setTitle(""); props.onChange(e) }} name={title}><Trans>submit</Trans></button>
+                    </div>
+                    <div className="task-panel">
+                        <ul>{completedDailies}</ul>
+                    </div>
                 </TabPanel>
             </Tabs>
 

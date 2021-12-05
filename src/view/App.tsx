@@ -61,7 +61,9 @@ class App extends React.Component<any, any> {
             );
         }
         else {
-            return <div className="cron"></div>
+            return (
+                <div className="cron"></div>
+            );
         };
     }
     async runCron() {
@@ -294,12 +296,13 @@ class App extends React.Component<any, any> {
         else if (!this.state.isLoaded)
             return <div className="loading"><Trans>Loading....</Trans></div>
         else {
-            return (<div className="plugin-root">
-                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-                <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards} />
-                {content}
-                <Statsview user_data={this.state.user_data} />
-            </div>
+            return (
+                <div className="plugin-root">
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+                    <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards} />
+                    {content}
+                    <Statsview user_data={this.state.user_data} />
+                </div>
             );
         }
     }

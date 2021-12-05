@@ -1,7 +1,3 @@
-* {
-  padding: 0;
-}
-
 .add-task-input {
   display: flex;
 }
@@ -26,20 +22,15 @@
 
 .todo-item {
     display: grid;
-    grid-template-columns: 1fr 30fr 1fr 1fr;
-    justify-content: left;
-    align-items: flex-start;
-    padding: 0px 0px 0;
-    width: 100%;
+    grid-template-columns: 1fr 25fr 1fr 1fr;
     border-bottom: 1px solid #cecece;
     font-family: Roboto, sans-serif;
-    font-weight: normal;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 p {
     margin: 0;
-    padding: 5px;
+    padding: 3px;
 }
 
 .reward-item {
@@ -56,6 +47,7 @@ p {
 
 .reward-click {
   padding: 5px 15px;
+  width: 60px;
 }
 
 
@@ -67,24 +59,19 @@ p {
 }
 
 .habit-plus {
-  /* background-color: #fff; */
   border: none;
-  /* color: black; */
-  padding: 7px 5px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+  margin: 4px 4px 4px 4px;
 }
 
 .habit-minus {
-  /* background-color: #fff; */
-  /* border-radius: 50%; */
   border: none;
-  /* color: black; */
-  padding: 7px 5px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+  margin: 4px 4px 4px 4px;
 }
 
 .habit-item {
@@ -130,7 +117,7 @@ input[type=checkbox]:focus {
 .plugin-root {
   min-width: 260px;
   display: grid;
-  grid-template-rows: 94% 4% 1% 1%;
+  grid-template-rows: 98% 1% 1%;
   height: inherit;
 }
 
@@ -148,6 +135,11 @@ input[type=checkbox]:focus {
 
 ul {
   margin: 0;
+  padding-left: 0px;
+}
+
+.todo-content ul {
+  padding-left: 20px;
 }
 
 /* react-tabs internal file :wink: */
@@ -274,7 +266,6 @@ ul li:not(.task-list-item)::before {
 
 button {
   margin: auto;
-  margin-bottom: 5px;
   white-space: nowrap;
   padding: 5px 5px;
   margin-right: 0;
@@ -282,12 +273,9 @@ button {
 .cron {
   display: inline-grid;
   justify-content: center;
-  text-align: center;;
-  margin-top: 5px;
+  margin-top: -20px;
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 10px;
-  border-radius: 10px;
 }
 #cronMessage {
   margin: 20px;

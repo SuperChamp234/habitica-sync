@@ -23,7 +23,10 @@ export default function Index(props: any) {
                 <input className="task-input-box" type="text" placeholder={t('Add Reward')} onChange={event => setTitle(event.target.value)} value={title} />
                 <button className="submit-button" id="add-reward" onClick={function (e) { setTitle(""); props.onChange(e) }} name={title}><Trans>submit</Trans></button>
             </div>
-            <ul>{allRewards}</ul>
+            <div className="task-panel">
+                <ul>{allRewards}</ul>
+            </div>
+
         </div>
 
         return (display);
