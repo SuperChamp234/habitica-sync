@@ -198,8 +198,8 @@ class App extends React.Component<any, any> {
                         if (event.target.innerText == 'clear') {
                             this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
                         } else if (event.target.attributes.title.value == 'submit') {
-                            const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
-                            const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
+                            const task_title = event.target.attributes['data-title'].value
+                            const task_notes = event.target.attributes['data-notes'].value
                             this.sendUpdateTask(event.target.id, 'todo', i18next.t("Update!"), task_title, task_notes)
                         }
                     } else {
@@ -230,8 +230,8 @@ class App extends React.Component<any, any> {
                         }
                     } else {
                         if (event.target.attributes.title.value == 'submit') {
-                            const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
-                            const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
+                            const task_title = event.target.attributes['data-title'].value
+                            const task_notes = event.target.attributes['data-notes'].value
                             this.sendUpdateTask(event.target.id, 'daily', i18next.t("Update!"), task_title, task_notes)
                         } else if (event.target.attributes.title.value == 'delete') {
                             this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))
@@ -252,9 +252,9 @@ class App extends React.Component<any, any> {
             this.state.tasks.habits.forEach((element: any) => {
                 if (element.id == event.target.id) {
                     if (event.target.attributes.title && event.target.attributes.title.value == 'submit') {
-                        const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
-                        const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
-                        this.sendUpdateTask(event.target.id, 'daily', i18next.t("Update!"), task_title, task_notes)
+                        const task_title = event.target.attributes['data-title'].value
+                        const task_notes = event.target.attributes['data-notes'].value
+                        this.sendUpdateTask(event.target.id, 'habit', i18next.t("Update!"), task_title, task_notes)
                     } else if (event.target.attributes.title && event.target.attributes.title.value == 'plus') {
                         this.sendScore(event.target.id, "up", i18next.t('Plus!'))
                     } else if (event.target.attributes.title && event.target.attributes.title.value == 'mins') {
@@ -267,7 +267,6 @@ class App extends React.Component<any, any> {
     }
 
     handleChangeRewards(event: any) {
-        console.log(event)
         if (event.target.id == "add-reward") {
             const title = event.target.name
             this.sendAddTask("reward", title, i18next.t('Add!'))
@@ -276,9 +275,9 @@ class App extends React.Component<any, any> {
             this.state.tasks.rewards.forEach((element: any) => {
                 if (element.id == target_id) {
                     if (event.target.attributes.title && event.target.attributes.title.value == 'submit') {
-                        const task_title = event.target.attributes['data-title'].value ? event.target.attributes['data-title'].value : element.text
-                        const task_notes = event.target.attributes['data-notes'].value ? event.target.attributes['data-notes'].value : element.notes
-                        const task_coin = event.target.attributes['data-coin'].value ? event.target.attributes['data-coin'].value : element.value
+                        const task_title = event.target.attributes['data-title'].value
+                        const task_notes = event.target.attributes['data-notes'].value
+                        const task_coin = event.target.attributes['data-coin'].value
                         this.sendUpdateTask(event.target.id, 'reward', i18next.t('Edit!'), task_title, task_notes, task_coin)
                     } else if (event.target.innerText == 'clear') {
                         this.sendDeleteTask(event.target.id, i18next.t('Deleted!'))

@@ -5,9 +5,9 @@ import { Trans } from 'react-i18next'
 
 function RewardItem(props: any) {
     const [state, setState] = React.useState('view')
-    const [title, setTitle] = React.useState('')
-    const [notes, setNotes] = React.useState('')
-    const [coin, setCoin] = React.useState('0')
+    const [title, setTitle] = React.useState(props.reward_text)
+    const [notes, setNotes] = React.useState(props.reward_notes)
+    const [coin, setCoin] = React.useState(props.reward_value)
     if (state === 'view') {
         return (
             <div className="reward-item" id={props.id}>

@@ -4,8 +4,8 @@ import { Trans } from 'react-i18next'
 
 function TodoItem(props: any) {
     const [state, setState] = React.useState('view')
-    const [title, setTitle] = React.useState('')
-    const [notes, setNotes] = React.useState('')
+    const [title, setTitle] = React.useState(props.todo_text)
+    const [notes, setNotes] = React.useState(props.todo_notes)
     if (state === 'view') {
         return (
             <div className="todo-item" id={props.id}>

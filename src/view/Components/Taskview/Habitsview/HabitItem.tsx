@@ -5,8 +5,8 @@ import { Trans } from 'react-i18next'
 
 function HabitItem(props: any) {
     const [state, setState] = React.useState('view')
-    const [title, setTitle] = React.useState('')
-    const [notes, setNotes] = React.useState('')
+    const [title, setTitle] = React.useState(props.habit_text)
+    const [notes, setNotes] = React.useState(props.habit_notes)
     if (state == 'view') {
         return (
             <div className="habit-item" id={props.id}>
