@@ -7,6 +7,7 @@
     "title": "标题",
     "notes": "备注",
     "type": "类型",
+    "cost": "花费",
     "Daily": "每日任务",
     "submit": "添加",
     "No Dailies Present": "目前每日任务为空",

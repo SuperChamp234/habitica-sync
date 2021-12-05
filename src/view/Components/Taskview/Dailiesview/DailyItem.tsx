@@ -1,5 +1,6 @@
 import * as React from "react";
 import ReactMarkdown from "react-markdown";
+import { Trans } from 'react-i18next'
 
 function DailyItem(props: any) {
     const [state, setState] = React.useState('view')
@@ -24,8 +25,10 @@ function DailyItem(props: any) {
     } else {
         return (
             <div className="edit-daily-item edit-item">
-                <input type="text" onChange={event => setTitle(event.target.value)} defaultValue={props.daily_text}></input>
-                <input type="text" onChange={event => setNotes(event.target.value)} defaultValue={props.daily_notes}></input>
+                <label><Trans>title</Trans>:</label>
+                <textarea onChange={event => setTitle(event.target.value)} defaultValue={props.daily_text}></textarea>
+                <label><Trans>notes</Trans>:</label>
+                <textarea onChange={event => setNotes(event.target.value)} defaultValue={props.daily_notes}></textarea>
                 <div className="edit-daily-button edit-button">
                     <button className="task-operation"><span className="material-icons md-24" id={props.id} onClick={function (e) { props.onChange(e); setState('view') }} title="submit" data-title={title} data-notes={notes}>check</span></button>
                     <button className="task-operation"><span className="material-icons md-24" id={props.id} onClick={() => setState('view')} title="cancel">clear</span></button>

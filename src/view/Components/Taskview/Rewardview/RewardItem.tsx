@@ -1,6 +1,8 @@
 import Emoji from "react-emoji-render";
 import * as React from "react";
 import ReactMarkdown from "react-markdown";
+import { Trans } from 'react-i18next'
+
 function RewardItem(props: any) {
     const [state, setState] = React.useState('view')
     const [title, setTitle] = React.useState('')
@@ -25,8 +27,11 @@ function RewardItem(props: any) {
     } else {
         return (
             <div className="edit-reward-item edit-item">
-                <input type="text" onChange={event => setTitle(event.target.value)} defaultValue={props.reward_text}></input>
-                <input type="text" onChange={event => setNotes(event.target.value)} defaultValue={props.reward_notes}></input>
+                <label><Trans>title</Trans>:</label>
+                <textarea onChange={event => setTitle(event.target.value)} defaultValue={props.reward_text}></textarea>
+                <label><Trans>notes</Trans>:</label>
+                <textarea onChange={event => setNotes(event.target.value)} defaultValue={props.reward_notes}></textarea>
+                <label><Trans>cost</Trans>:</label>
                 <input type="text" onChange={event => setCoin(event.target.value)} defaultValue={props.reward_value}></input>
                 <div className="edit-reward-button edit-button">
                     <button className="task-operation"  ><span className="material-icons md-24" id={props.id} onClick={function (e) { props.onChange(e); setState('view') }} title="submit" data-title={title} data-notes={notes} data-coin={coin}>check</span></button>
