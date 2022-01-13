@@ -8,12 +8,20 @@ export default function Index(props: any){
     }
     else {
         const incompleteTodos = props.todos.map((todo: any) => {
+
                 if(!todo.completed) {
+                    let todo_notes = '';
+                    let todo_subtasks = '';
                     if (props.settings.showTaskDescription) {
-                        return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} todo_notes={todo.notes} onChange={props.onChange} completed={todo.completed}/>
-                    } else {
-                        return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} onChange={props.onChange} completed={todo.completed}/>
+                        todo_notes = todo.notes;
                     }
+
+                    if (props.settings.showSubTasks) {
+                        todo_subtasks = todo.checklist;
+                    }
+                    return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} 
+                        todo_notes={todo_subtasks} todo_subtasks={todo_subtasks}
+                        onChange={props.onChange} completed={todo.completed}/>
                 }
                     
         })

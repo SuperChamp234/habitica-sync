@@ -194,9 +194,10 @@ class App extends React.Component<any, any> {
         else {
             return (<div className="plugin-root">
                 {content}
+                <Statsview className ="stats-view" user_data={this.state.user_data} />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} settings = {this.props.plugin.settings} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards}/>
-                <Statsview user_data={this.state.user_data} />
+                
             </div>
             );
         }

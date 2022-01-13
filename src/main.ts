@@ -6,6 +6,7 @@ interface HabiticaSyncSettings {
     userID: string
     apiToken: string
     showTaskDescription: boolean
+    showSubTasks: boolean
 }
 const DEFAULT_SETTINGS: Partial<HabiticaSyncSettings> = {
     userID: "",

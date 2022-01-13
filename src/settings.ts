@@ -50,6 +50,18 @@ export class HabiticaSyncSettingsTab extends PluginSettingTab {
                     await this.plugin.saveSettings();
                 })
             });
+
+        new Setting(containerEl)
+        .setName("Show Sub-Tasks")
+        .setDesc("Updates require pane re-opening")
+        .addToggle(cb => {
+            cb
+                .setValue(this.plugin.settings.showSubTasks)
+                .onChange(async (isEnable) => {
+                    this.plugin.settings.showSubTasks = isEnable;
+                    await this.plugin.saveSettings();
+                })
+            });
         
     }
 }
