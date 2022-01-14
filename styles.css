@@ -49,7 +49,6 @@
 
 .description {
   font-family: Open Sans, sans-serif;
-  font-style: italic;
   font-weight: 100;
 }
 .description > ul {
@@ -302,4 +301,7 @@ button {
   font-weight: normal;
   font-family: Roboto, sans-serif;
   justify-content: flex-start;
+}
+.emoji {
+  height: 1em;
 }

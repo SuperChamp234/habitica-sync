@@ -24,7 +24,7 @@ export default class HabiticaSync extends Plugin {
             VIEW_TYPE,
             (leaf) => (new HabiticaSyncView(leaf, this))
           );
-        this.addRibbonIcon("popup-open", "Open Habitica Pane", () => {  //activate view
+        this.addRibbonIcon("popup-open", "Open Habitica Pane", () => {
             this.activateView();
         });
         this.addCommand({
@@ -35,7 +35,6 @@ export default class HabiticaSync extends Plugin {
                 this.activateView();
             }
         });
-        // this.activateView();
         
     }
     async loadSettings() {

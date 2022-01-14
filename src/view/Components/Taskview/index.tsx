@@ -38,5 +38,5 @@ export default function Index(props: any){
                     </Tabs>
                 </div>
     return(display);
-}                 //yes
+}                 
 

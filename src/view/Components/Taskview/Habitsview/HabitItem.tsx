@@ -1,8 +1,9 @@
-import Emoji from "react-emoji-render";
 import * as React from "react";
-import ReactMarkdown from "react-markdown";
+import renderMarkdown from "../markdownRender";
 
 function HabitItem(props: any) {
+    let habit_text = renderMarkdown(props.habit_text);
+    let habit_notes = renderMarkdown(props.habit_notes);
     return (
         <div className="habit-item" id={props.id}>
             <div className="habit-button-grp">
@@ -14,8 +15,8 @@ function HabitItem(props: any) {
                 </button>
             </div>
             <div>
-                <p className="habit-text"><Emoji text={props.habit_text}></Emoji></p>
-                <ReactMarkdown className="description" children={props.habit_notes} />
+                <p className="habit-text"><span dangerouslySetInnerHTML={{__html: habit_text}}></span></p>
+                <div className="description" dangerouslySetInnerHTML={{__html: habit_notes}}></div>
             </div>
         </div>
     )

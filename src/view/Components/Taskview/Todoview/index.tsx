@@ -20,7 +20,7 @@ export default function Index(props: any){
                         todo_subtasks = todo.checklist;
                     }
                     return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} 
-                        todo_notes={todo_subtasks} todo_subtasks={todo_subtasks}
+                        todo_notes={todo_notes} todo_subtasks={todo_subtasks}
                         onChange={props.onChange} completed={todo.completed}/>
                 }
                     
