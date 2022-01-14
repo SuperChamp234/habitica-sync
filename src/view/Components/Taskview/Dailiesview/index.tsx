@@ -3,11 +3,14 @@ import DailyItem from "./DailyItem"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 export default function Index(props: any){
+
     if(props.dailys == undefined) {
         return <div id="classDisplay">No Dailies Present</div>
     }
     else {
+
         const notDueDailies = props.dailys.map((daily: any) => {
+
             if (!daily.isDue) {
                 let daily_notes = '';
                 let daily_subtasks = '';
@@ -23,6 +26,7 @@ export default function Index(props: any){
                     onChange={props.onChange} completed={daily.completed} onChangeChecklistItem={props.onChangeChecklistItem}/>
             }
         })
+
         const incompleteDailies = props.dailys.map((daily: any) => {
                 if (!daily.completed&&daily.isDue) {
                     let daily_notes = '';
@@ -42,7 +46,7 @@ export default function Index(props: any){
         const completedDailies = props.dailys.map((daily: any) => {
             // if(daily.completed)
             //     return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} daily_notes={daily.notes} onChange={props.onChange} completed={daily.completed}/>
-            if (!daily.completed) {
+            if (daily.completed) {
                 let daily_notes = '';
                 let daily_subtasks = '';
                 if (props.settings.showTaskDescription) {
@@ -57,6 +61,7 @@ export default function Index(props: any){
                     onChange={props.onChange} completed={daily.completed} onChangeChecklistItem={props.onChangeChecklistItem}/>
             }
         })
+
         const display = <div id="classDisplay">
                             <Tabs>
                             <TabList>
@@ -79,4 +84,3 @@ export default function Index(props: any){
     }
         
 }
-
