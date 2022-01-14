@@ -305,3 +305,7 @@ button {
 .emoji {
   height: 1em;
 }
+.description>ul {
+  list-style-type: disc;
+  margin-left: 10% !important;
+}

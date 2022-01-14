@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Notice } from "obsidian";
-import { getStats, scoreTask, makeCronReq, costReward } from "./habiticaAPI"
+import { getStats, scoreTask, makeCronReq, costReward, scoreChecklistItem } from "./habiticaAPI"
 import Statsview from "./Components/Statsview"
 import Taskview from "./Components/Taskview"
+import ReactDOM from "react-dom";
 
 class App extends React.Component<any, any> {
     private _username = "";
@@ -44,6 +45,7 @@ class App extends React.Component<any, any> {
         this.handleChangeDailys = this.handleChangeDailys.bind(this);
         this.handleChangeHabits = this.handleChangeHabits.bind(this);
         this.handleChangeRewards = this.handleChangeRewards.bind(this);
+        this.handleChangeChecklistItem = this.handleChangeChecklistItem.bind(this);
         this.runCron = this.runCron.bind(this);
 
     }
@@ -144,8 +146,6 @@ class App extends React.Component<any, any> {
             }
         })
     }
-
-
     handleChangeDailys(event: any) {
         this.state.tasks.dailys.forEach((element: any) => {
             if (element.id == event.target.id) {
@@ -186,6 +186,26 @@ class App extends React.Component<any, any> {
             }
         })
     }
+    async handleChangeChecklistItem(event: any){
+        let parentID = event.target.parentNode.parentNode.parentNode.getAttribute("id")
+        let targetID = event.target.id
+        console.log(parentID+ " , " + targetID)
+        try{
+            let response = await scoreChecklistItem(this.username, this.credentials, targetID, parentID);
+            let result = await response.json();
+            if (result.success === true) {
+                new Notice("Checked!");
+                this.reloadData();
+            } else {
+                new Notice("Resyncing, please try again");
+                this.reloadData();
+            }
+        } catch (e) {
+            console.log(e);
+            new Notice("API Error: Please check credentials")
+        }
+    }
+
     render() {
         let content = this.CheckCron(this.state.user_data.lastCron);
         if (this.state.error)
@@ -197,7 +217,7 @@ class App extends React.Component<any, any> {
                 {content}
                 <Statsview className ="stats-view" user_data={this.state.user_data} />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-                <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} settings = {this.props.plugin.settings} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards}/>
+                <Taskview data={this.state.tasks} handleChangeTodos={this.handleChangeTodos} settings = {this.props.plugin.settings} handleChangeDailys={this.handleChangeDailys} handleChangeHabits={this.handleChangeHabits} handleChangeRewards={this.handleChangeRewards} handleChangeChecklistItem={this.handleChangeChecklistItem}/>
                 
             </div>
             );

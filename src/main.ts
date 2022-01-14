@@ -7,10 +7,14 @@ interface HabiticaSyncSettings {
     apiToken: string
     showTaskDescription: boolean
     showSubTasks: boolean
+    dueDateFormat: string
 }
 const DEFAULT_SETTINGS: Partial<HabiticaSyncSettings> = {
     userID: "",
-    apiToken: ""
+    apiToken: "",
+    showTaskDescription: true,
+    showSubTasks: true,
+    dueDateFormat: "DD-MM-YYYY"
 }
 export default class HabiticaSync extends Plugin {
     settings: HabiticaSyncSettings;

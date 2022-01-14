@@ -21,7 +21,7 @@ export default function Index(props: any){
                     }
                     return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} 
                         todo_notes={todo_notes} todo_subtasks={todo_subtasks}
-                        onChange={props.onChange} completed={todo.completed}/>
+                        onChange={props.onChange} onChangeChecklistItem={props.onChangeChecklistItem} completed={todo.completed} dueDate={todo.date} dueDateFormat={props.settings.dueDateFormat}/>
                 }
                     
         })

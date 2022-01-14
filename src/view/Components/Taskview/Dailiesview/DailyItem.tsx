@@ -11,8 +11,8 @@ function DailyItem(props: any) {
             <div>
                 <p><span dangerouslySetInnerHTML={{__html: text_html}}></span></p>
                 <div className="description" dangerouslySetInnerHTML={{__html: note_html}}></div>
-                {console.log(props.checklist)}
-                <DailySubTasks subtasks={props.daily_subtasks} onChange={props.onChange}></DailySubTasks>
+                {/* {console.log(props.checklist)} */}
+                <DailySubTasks subtasks={props.daily_subtasks} onChangeChecklistItem={props.onChangeChecklistItem}></DailySubTasks>
             </div>
 
         </div>
