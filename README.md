@@ -24,10 +24,9 @@ To sync your Habitica account, go to the settings page of the plugin and enter y
 The following two inputs help fetch your user data to be displayed in the Obsidian view:
 - **Habitica User ID:** You can find this by clicking on the "User" icon in the top right of the Habitica webapp, "Settings", then "API"
 - **Habitica Token API:** You can find this by clicking on the "User" icon in the top right of the Habitica webapp, "Settings", then "API"
-
-
-**Show Task Descriptions:** Toggles whether description/notes for tasks will be shown or not
-
+- **Show Task Descriptions:** Toggles whether description/notes for tasks will be shown or not
+- **Due date format:** Format in which the due date is displayed
+- **Show Checklist items:** Toggles the checklist items for a task.
 
 
 ## Roadmap
