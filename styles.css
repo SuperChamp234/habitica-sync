@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open Sans:ital,wght@0,400;1,100&family=Roboto&display=swap');
 
-* {
-  padding: 0;
-}
-
 .add-task-input {
   display: flex;
 }
@@ -45,6 +41,7 @@
     font-family: Roboto, sans-serif;
     font-weight: bold;
     font-size: 16px;
+    padding-left: 0;
 }
 
 .description {
@@ -53,6 +50,9 @@
 }
 .description > ul {
   list-style-type: none;
+}
+p {
+    margin: 0;
 }
 
 .habit-text {

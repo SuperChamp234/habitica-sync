@@ -36,10 +36,10 @@ export default function Index(props: any){
                                 <Tab>Completed</Tab>
                             </TabList>
                             <TabPanel>
-                                <ul>{incompleteTodos}</ul>
+                                <ul className="todolist-indent">{incompleteTodos}</ul>
                             </TabPanel>
                             <TabPanel>
-                                <ul>{completedTodos}</ul>
+                                <ul className="todolist-indent">{completedTodos}</ul>
                             </TabPanel>
                             </Tabs>
                         </div>
