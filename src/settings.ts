@@ -1,5 +1,6 @@
 import HabiticaSync from "./main";
 import { App, PluginSettingTab, Setting } from "obsidian";
+import moment from "moment";
 
 export class HabiticaSyncSettingsTab extends PluginSettingTab {
     plugin: HabiticaSync;
@@ -38,5 +39,42 @@ export class HabiticaSyncSettingsTab extends PluginSettingTab {
                     await this.plugin.saveSettings();
                 })
         );
+
+        new Setting(containerEl)
+        .setName("Show Task Descriptions")
+        .setDesc("Updates require pane re-opening")
+        .addToggle(cb => {
+            cb
+                .setValue(this.plugin.settings.showTaskDescription)
+                .onChange(async (isEnable) => {
+                    this.plugin.settings.showTaskDescription = isEnable;
+                    await this.plugin.saveSettings();
+                })
+            });
+
+        new Setting(containerEl)
+        .setName("Show Sub-Tasks")
+        .setDesc("Updates require pane re-opening")
+        .addToggle(cb => {
+            cb
+                .setValue(this.plugin.settings.showSubTasks)
+                .onChange(async (isEnable) => {
+                    this.plugin.settings.showSubTasks = isEnable;
+                    await this.plugin.saveSettings();
+                })
+            });
+        new Setting(containerEl)
+        .setName("Due Date Format")
+        .setDesc("Update requires pane re-opening, check moment.js docs for formatting. Current Format: " + moment().format(this.plugin.settings.dueDateFormat))
+        .addText((text) => 
+            text
+                .setPlaceholder("DD-MM-YYYY")
+                .setValue(this.plugin.settings.dueDateFormat)
+                .onChange(async (value) => {
+                    this.plugin.settings.dueDateFormat = value;
+                    await this.plugin.saveSettings();
+                })
+        );
+        
     }
 }

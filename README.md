@@ -24,6 +24,9 @@ To sync your Habitica account, go to the settings page of the plugin and enter y
 The following two inputs help fetch your user data to be displayed in the Obsidian view:
 - **Habitica User ID:** You can find this by clicking on the "User" icon in the top right of the Habitica webapp, "Settings", then "API"
 - **Habitica Token API:** You can find this by clicking on the "User" icon in the top right of the Habitica webapp, "Settings", then "API"
+- **Show Task Descriptions:** Toggles whether description/notes for tasks will be shown or not
+- **Due date format:** Format in which the due date is displayed
+- **Show Checklist items:** Toggles the checklist items for a task.
 
 
 ## Roadmap
@@ -33,3 +36,4 @@ We will be implementing additional features including:
 *Feel free to support us and donate!*
 
 <a href='https://ko-fi.com/leonardandran' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+

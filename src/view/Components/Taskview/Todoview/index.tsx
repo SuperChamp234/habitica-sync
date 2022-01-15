@@ -8,12 +8,26 @@ export default function Index(props: any){
     }
     else {
         const incompleteTodos = props.todos.map((todo: any) => {
-                if(!todo.completed)
-                    return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} onChange={props.onChange} completed={todo.completed}/>
+
+                if(!todo.completed) {
+                    let todo_notes = '';
+                    let todo_subtasks = '';
+                    if (props.settings.showTaskDescription) {
+                        todo_notes = todo.notes;
+                    }
+
+                    if (props.settings.showSubTasks) {
+                        todo_subtasks = todo.checklist;
+                    }
+                    return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} 
+                        todo_notes={todo_notes} todo_subtasks={todo_subtasks}
+                        onChange={props.onChange} onChangeChecklistItem={props.onChangeChecklistItem} completed={todo.completed} dueDate={todo.date} dueDateFormat={props.settings.dueDateFormat}/>
+                }
+                    
         })
         const completedTodos = props.todos.map((todo: any) => {
             if(todo.completed)
-                return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} onChange={props.onChange} completed={todo.completed}/>
+                return <TodoItem key={todo.id} id={todo.id} todo_text={todo.text} todo_notes={todo.notes} onChange={props.onChange} completed={todo.completed}/>
         })
         const display = <div id="classDisplay">
                             <Tabs>

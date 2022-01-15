@@ -5,23 +5,30 @@ import { HabiticaSyncView, VIEW_TYPE} from "./view"
 interface HabiticaSyncSettings {
     userID: string
     apiToken: string
+    showTaskDescription: boolean
+    showSubTasks: boolean
+    dueDateFormat: string
 }
 const DEFAULT_SETTINGS: Partial<HabiticaSyncSettings> = {
     userID: "",
-    apiToken: ""
+    apiToken: "",
+    showTaskDescription: true,
+    showSubTasks: true,
+    dueDateFormat: "DD-MM-YYYY"
 }
 export default class HabiticaSync extends Plugin {
     settings: HabiticaSyncSettings;
     view: HabiticaSyncView;
 
     async onload() {
+        console.log("load plugin: habitica-sync")
         await this.loadSettings();
         this.addSettingTab(new HabiticaSyncSettingsTab(this.app, this));
         this.registerView(
             VIEW_TYPE,
             (leaf) => (new HabiticaSyncView(leaf, this))
           );
-        this.addRibbonIcon("popup-open", "Open Habitica Pane", () => {  //activate view
+        this.addRibbonIcon("popup-open", "Open Habitica Pane", () => {
             this.activateView();
         });
         this.addCommand({
@@ -32,6 +39,7 @@ export default class HabiticaSync extends Plugin {
                 this.activateView();
             }
         });
+        
     }
     async loadSettings() {
         this.settings = Object.assign(DEFAULT_SETTINGS, await this.loadData())
@@ -39,9 +47,10 @@ export default class HabiticaSync extends Plugin {
     async saveSettings() {
         await this.saveData(this.settings);
     }
+
     async onunload() {
         await this.view.onClose();
-
+    
         this.app.workspace
             .getLeavesOfType(VIEW_TYPE)
             .forEach((leaf) => leaf.detach());

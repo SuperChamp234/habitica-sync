@@ -31,8 +31,7 @@ export class HabiticaSyncView extends ItemView {
            this.containerEl.children[1]
         )
     }
-
-    async onClose(){
+    async onClose(){      
         ReactDOM.unmountComponentAtNode(this.containerEl.children[1]);
     }
 }

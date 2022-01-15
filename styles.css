@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open Sans:ital,wght@0,400;1,100&family=Roboto&display=swap');
+
+* {
+  padding: 0;
+}
+
+.add-task-input {
+  display: flex;
+}
 
 #profile-name {
   font-size: x-large;
@@ -5,77 +15,146 @@
   padding-bottom: 3%;
 }
 .stats {
-  padding-bottom: 6px;
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.stats-view {
+  border-bottom: 1px;
+}
+.modify-todo {
+  align-self: center;
+}
+
+.delete-todo {
+  align-self: center;
 }
 
 .todo-item {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0px 0px 0;
-  width: 80%;
-  border-bottom: 1px solid #cecece;
-  font-family: Roboto, sans-serif;
-  font-weight: normal;
-  font-size: 16px;
+    display: grid;
+    grid-template-columns: 1fr 30fr 1fr 1fr;
+    justify-content: left;
+    align-items: flex-start;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    border-bottom: 1px solid #cecece;
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.description {
+  font-family: Open Sans, sans-serif;
+  font-weight: 100;
+}
+.description > ul {
+  list-style-type: none;
+}
+p {
+    margin: 0;
 }
 
 .habit-text {
-  text-align: center !important;
-  padding: 0px;
-  width: 50%;
+  text-align: left !important;
+  font-weight: bold;
+  padding-top: 5px;
+  width: 80%;
   margin-right: 20px;
 }
 
-.habit-plus {
-  /* background-color: #fff; */
+.habit-button {
+  background-color: var(--interactive-accent);
   border: none;
-  color: white;
-  padding: 7px 10px;
+  /* color: black; */
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+  display: block;
+  width: 100%;
+  color: var(--text-on-accent);
 }
-
-.habit-minus {
-  /* background-color: #fff; */
-  /* border-radius: 50%; */
-  border: none;
-  color: white;
-  padding: 7px 10px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
+/* habit-button on hover css selector */
+.habit-button:hover {
+  color: var(--text-on-accent);
+  background-color: var(--interactive-accent-hover);
 }
 
 .habit-item {
   display: flex;
-  /* justify-content: center; */
-  align-content: space-between;
-  align-items: center;
-  padding: 0px 0px 0;
+  grid-template-columns: 60px 1fr;
   width: 100%;
+  gap: 5px;
   border-bottom: 1px solid #cecece;
-  font-family: Roboto, sans-serif;
-  font-weight: 50%;
+  font-family: Open Sans, sans-serif;
+  font-weight: 100%;
   font-size: 16px;
-  
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.habit-button-grp {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: stretch;
+  height: 100%;
 }
 
 input[type=checkbox] {
   margin-right: 10px;
+  margin-top: 5px;
+  align-self: start;
+}
+
+.todo-content {
+  align-self: center;
+}
+
+.submit-button {
+    /* padding: 5px 5px; */
+    font-size: 15px;
+    border: 1px solid #aaa;
+    /* white-space: nowrap; */
+    /* margin: 10px; */
+    margin: 0;
 }
 
 input[type=checkbox]:focus {
   outline: 0;
 }
 
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+
 .plugin-root {
   min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+#classDisplay {
+  height: 100%;
+  width: 100%;
+}
+
+
+.view-content {
+  margin-bottom: 0;
 }
 
 .substats {
   font-size: medium;
+}
+
+ul {
+  margin: 0;
 }
 
 /* react-tabs internal file :wink: */
@@ -94,12 +173,12 @@ input[type=checkbox]:focus {
 
 .react-tabs {
   -webkit-tap-highlight-color: transparent;
-  
+  height: 100%;
 }
 
 .react-tabs__tab-list {
   border-bottom: 1px solid #aaa;
-  margin: 0 0 10px;
+  margin: 0 0 5px;
   padding: 0;
 }
 
@@ -144,6 +223,14 @@ input[type=checkbox]:focus {
 
 .react-tabs__tab-panel {
   display: none;
+  left: 0px;
+  height: 88%;
+  /* overflow: scroll; */
+}
+
+.task-panel {
+  overflow: scroll;
+  height: 100%;
 }
 
 .react-tabs__tab-panel--selected {
@@ -159,9 +246,45 @@ ul li:not(.task-list-item)::before {
   font-weight: bold;
   text-shadow: 0 0 0.5em transparent;
 }
-body > div.app-container.is-left-sidedock-collapsed.is-right-sidedock-collapsed > div.horizontal-main-container > div > div.workspace-split.mod-horizontal.mod-right-split > div.workspace-tabs > div.workspace-leaf > div > div.view-content > div > div.cron > button {
+
+.task-operation {
+  align-self: center;
+  margin: 0;
+  padding: 0;
+}
+
+.edit-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.edit-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.task-submit {
+  display: grid;
+  grid-template-columns: 10fr 5fr;
+}
+
+.add-task-input {
+  display: block;
+  width: 100%;
+}
+
+.task-input-box {
+  margin-right: 10px;
+}
+
+button {
   margin: auto;
   margin-bottom: 5px;
+  white-space: nowrap;
+  padding: 5px 5px;
+  margin-right: 0;
 }
 .cron {
   display: inline-grid;
@@ -171,11 +294,33 @@ body > div.app-container.is-left-sidedock-collapsed.is-right-sidedock-collapsed 
   margin-left: 10%;
   margin-right: 10%;
   margin-bottom: 10px;
-  background-color: var(--background-secondary-alt);
   border-radius: 10px;
 }
 #cronMessage {
   margin: 20px;
   margin-bottom: 10px;
   color: var(--text-normal)
+}
+#cronButton {
+  margin: auto;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  padding: 5px 5px;
+  background-color: var(--interactive-accent);
+  margin-right: auto;
+}
+
+.subtask {
+  display: flex;
+  flex-direction: row;
+  font-weight: normal;
+  font-family: Roboto, sans-serif;
+  justify-content: flex-start;
+}
+.emoji {
+  height: 1em;
+}
+.description>ul {
+  list-style-type: disc;
+  margin-left: 10% !important;
 }
