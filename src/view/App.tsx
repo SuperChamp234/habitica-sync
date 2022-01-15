@@ -34,6 +34,7 @@ class App extends React.Component<any, any> {
                 stats: {
                     hp: 0,
                     lvl: 0,
+                    gold: 0,
                 },
                 lastCron: "",
             },
