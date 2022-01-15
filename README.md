@@ -9,29 +9,36 @@ The plugin's view is enabled by clicking on the "Open Habitica Pane" option in t
 To sync your Habitica account, go to the settings page of the plugin and enter your user ID and API token credentials.
 ## Features
 ### Pane View
-[![Image from Gyazo](https://i.gyazo.com/4266d01941e71fef41819ea8a6b6592e.png)](https://gyazo.com/4266d01941e71fef41819ea8a6b6592e)
-[![Image from Gyazo](https://i.gyazo.com/697a58b8e7ffd3df86a2944b6abbaa92.png)](https://gyazo.com/697a58b8e7ffd3df86a2944b6abbaa92)
-- View stats (HP, XP, coins)
-- View to do's, dailies, and habits
-  - Tab for active/completed tasks and dailies
+#### View stats (HP, XP, coins)
+#### Views
+Task Information:
+- Title, description, subtasks
+  - Markdown and emoji support
 
-#### Check off tasks/dailies in the view, modify habit counters (+/-)
-[![Image from Gyazo](https://i.gyazo.com/5759e12bc5267711c5e03485a6d72c2f.gif)](https://gyazo.com/5759e12bc5267711c5e03485a6d72c2f)
-- Can uncheck completed habits/todos as shown above
+Tabs:
+- To Do's
+	- Active/Completed
+- Dailies
+	- Due/Not Due/Completed
+	- [![Image from Gyazo](https://i.gyazo.com/1966b17f954dcffa954922570e860a06.png)](https://gyazo.com/1966b17f954dcffa954922570e860a06)
+- Habits
+	- [![Image from Gyazo](https://i.gyazo.com/280494e620fc91548838d5b29a62652b.png)](https://gyazo.com/280494e620fc91548838d5b29a62652b)
+- Rewards
+#### Interactivity
+- Check off tasks/dailies in the view
+	- Can uncheck completed habits/todos
+	- [![Image from Gyazo](https://i.gyazo.com/efb858cd9d54f9d9df936da1bd5858ed.gif)](https://gyazo.com/efb858cd9d54f9d9df936da1bd5858ed)
+- modify habit counters (+/-)
 
-## Settings
+### Settings
 
 The following two inputs help fetch your user data to be displayed in the Obsidian view:
 - **Habitica User ID:** You can find this by clicking on the "User" icon in the top right of the Habitica webapp, "Settings", then "API"
 - **Habitica Token API:** You can find this by clicking on the "User" icon in the top right of the Habitica webapp, "Settings", then "API"
 - **Show Task Descriptions:** Toggles whether description/notes for tasks will be shown or not
-- **Due date format:** Format in which the due date is displayed
-- **Show Checklist items:** Toggles the checklist items for a task.
-
+- **Show Subtasks:** Toggles whether subtasks for to do's/dailies will be shown or not
 
 ## Roadmap
-We will be implementing additional features including:
-- Add/delete/customize tasks and habits
 
 *Feel free to support us and donate!*
 
