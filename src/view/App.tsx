@@ -181,7 +181,7 @@ class App extends React.Component<any, any> {
         this.state.tasks.rewards.forEach((element: any) => {
             if (element.id == event.target.id) {
                 if (element.id == target_id) {
-                    this.sendReward(target_id, "down", "Cost!")
+                    this.sendReward(target_id, "down", "Redeemed!")
                 }
             }
         })
