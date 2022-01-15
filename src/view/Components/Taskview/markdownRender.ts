@@ -3,6 +3,10 @@ import markdownitEmoji from "markdown-it-emoji"
 import twemoji from "twemoji";
 
 export default function renderMarkdown(markdown: string) {
+    //check if markdown is empty or not a string
+    if (markdown === "" || markdown === undefined) {
+        return "";
+    }
     const md = new MarkdownIt({
         html: true,
         breaks: true,
