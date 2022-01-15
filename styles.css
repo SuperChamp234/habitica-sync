@@ -295,6 +295,14 @@ button {
   margin-bottom: 10px;
   color: var(--text-normal)
 }
+#cronButton {
+  margin: auto;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  padding: 5px 5px;
+  color: var(--interactive-accent);
+  margin-right: auto;
+}
 
 .subtask {
   display: flex;
