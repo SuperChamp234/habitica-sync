@@ -1,6 +1,6 @@
 {
   "name": "obsidian-habitica-integration",
-  "version": "0.12.0",
+  "version": "1.0.0",
   "description": "This plugin allows for Habitica integration into Obsidian",
   "main": "main.js",
   "scripts": {
