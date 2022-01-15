@@ -54,9 +54,6 @@
 .description > ul {
   list-style-type: none;
 }
-p {
-    margin: 0;
-}
 
 .habit-text {
   text-align: left !important;

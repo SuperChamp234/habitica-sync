@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-habitica-integration",
 	"name": "Habitica Sync",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.9.12",
 	"description": "This plugin helps integrate Habitica user tasks and stats into Obsidian",
 	"author": "Leoh and Ran",
