@@ -62,12 +62,30 @@ export default function Index(props: any){
             }
         })
 
+        const allDailies = props.dailys.map((daily: any) => {
+            // if(daily.completed)
+            //     return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} daily_notes={daily.notes} onChange={props.onChange} completed={daily.completed}/>
+            let daily_notes = '';
+            let daily_subtasks = '';
+            if (props.settings.showTaskDescription) {
+                daily_notes = daily.notes;
+            }
+
+            if (props.settings.showSubTasks) {
+                daily_subtasks = daily.checklist;
+            }
+            return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} 
+                daily_notes={daily_notes} daily_subtasks={daily_subtasks}
+                onChange={props.onChange} completed={daily.completed} onChangeChecklistItem={props.onChangeChecklistItem}/>
+        })
+        
         const display = <div id="classDisplay">
                             <Tabs>
                             <TabList>
                                 <Tab>Active</Tab>
                                 <Tab>Completed</Tab>
                                 <Tab>Not Due</Tab>
+                                <Tab>All</Tab>
                             </TabList>
                             <TabPanel>
                                 <ul>{incompleteDailies}</ul>
@@ -77,6 +95,9 @@ export default function Index(props: any){
                             </TabPanel>
                             <TabPanel>
                                 <ul>{notDueDailies}</ul>
+                            </TabPanel>
+                            <TabPanel>
+                                <ul>{allDailies}</ul>
                             </TabPanel>
                             </Tabs>
                         </div>
