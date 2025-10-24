@@ -23,7 +23,8 @@ export default function Index(props: any){
                 }
                 return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} 
                     daily_notes={daily_notes} daily_subtasks={daily_subtasks}
-                    onChange={props.onChange} completed={daily.completed} onChangeChecklistItem={props.onChangeChecklistItem}/>
+                    onChange={props.onChange} completed={daily.completed} 
+                    onChangeChecklistItem={props.onChangeChecklistItem} onDelete={props.onDelete}/>
             }
         })
 
@@ -40,7 +41,8 @@ export default function Index(props: any){
                     }
                     return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} 
                         daily_notes={daily_notes} daily_subtasks={daily_subtasks}
-                        onChange={props.onChange} completed={daily.completed} onChangeChecklistItem={props.onChangeChecklistItem}/>
+                        onChange={props.onChange} completed={daily.completed} 
+                        onChangeChecklistItem={props.onChangeChecklistItem} onDelete={props.onDelete}/>
                 }
             })
         const completedDailies = props.dailys.map((daily: any) => {
@@ -58,7 +60,8 @@ export default function Index(props: any){
                 }
                 return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} 
                     daily_notes={daily_notes} daily_subtasks={daily_subtasks}
-                    onChange={props.onChange} completed={daily.completed} onChangeChecklistItem={props.onChangeChecklistItem}/>
+                    onChange={props.onChange} completed={daily.completed} 
+                    onChangeChecklistItem={props.onChangeChecklistItem} onDelete={props.onDelete}/>
             }
         })
 
@@ -76,7 +79,8 @@ export default function Index(props: any){
             }
             return <DailyItem key={daily.id} id={daily.id} daily_text={daily.text} 
                 daily_notes={daily_notes} daily_subtasks={daily_subtasks}
-                onChange={props.onChange} completed={daily.completed} onChangeChecklistItem={props.onChangeChecklistItem}/>
+                onChange={props.onChange} completed={daily.completed} 
+                onChangeChecklistItem={props.onChangeChecklistItem} onDelete={props.onDelete}/>
         })
         
         const display = <div id="classDisplay">

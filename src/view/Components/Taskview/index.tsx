@@ -24,16 +24,16 @@ export default function Index(props: any){
                             </Tab>
                         </TabList>
                         <TabPanel>
-                            <Dailiesview dailys={props.data.dailys} settings = {props.settings} onChange={props.handleChangeDailys} onChangeChecklistItem={props.handleChangeChecklistItem}/>
+                            <Dailiesview dailys={props.data.dailys} settings = {props.settings} onChange={props.handleChangeDailys} onChangeChecklistItem={props.handleChangeChecklistItem} onDelete={props.handleDeleteTask}/>
                         </TabPanel>
                         <TabPanel>
                             <Habitsview habits={props.data.habits} settings = {props.settings} onChange={props.handleChangeHabits}/>
                         </TabPanel>
                         <TabPanel>
-                        <Todoview todos={props.data.todos} settings = {props.settings} onChange={props.handleChangeTodos} onChangeChecklistItem={props.handleChangeChecklistItem}/>
+                            <Todoview todos={props.data.todos} settings = {props.settings} onChange={props.handleChangeTodos} onChangeChecklistItem={props.handleChangeChecklistItem} onDelete={props.handleDeleteTask}/>
                         </TabPanel>
                         <TabPanel>
-                        <Rewardview rewards={props.data.rewards} settings = {props.settings} onChange={props.handleChangeRewards} />
+                            <Rewardview rewards={props.data.rewards} settings = {props.settings} onChange={props.handleChangeRewards} />
                         </TabPanel>
                     </Tabs>
                 </div>

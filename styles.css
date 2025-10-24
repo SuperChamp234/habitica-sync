@@ -30,9 +30,8 @@
 }
 
 .todo-item {
-    display: grid;
-    grid-template-columns: 1fr 30fr 1fr 1fr;
-    justify-content: left;
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -47,6 +46,10 @@
 .description {
   font-family: Open Sans, sans-serif;
   font-weight: 100;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 .description > ul {
   list-style-type: none;
@@ -103,8 +106,7 @@ p {
 
 input[type=checkbox] {
   margin-right: 10px;
-  margin-top: 5px;
-  align-self: start;
+  margin-top: 0;
 }
 
 .todo-content {
@@ -143,7 +145,7 @@ input[type=checkbox]:focus {
 
 
 .view-content {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .substats {
@@ -313,11 +315,42 @@ button {
   font-weight: normal;
   font-family: Roboto, sans-serif;
   justify-content: flex-start;
+  overflow: hidden;
+  max-width: 100%;
+  padding-left: 2rem;
 }
+
 .emoji {
   height: 1em;
 }
 .description>ul {
   list-style-type: disc;
   margin-left: 10% !important;
+}
+
+.todo-text-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.todo-text-container {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  display: flex;
+}
+
+.todo-text-container span {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.delete-button {
+  flex-shrink: 0;
 }
